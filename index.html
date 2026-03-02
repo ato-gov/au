@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australian Taxation Office | Professional Live</title>
+  <!-- Abril Fatface font -->
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ----- DESIGN SYSTEM ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #3844CA;
+      --navy-light: #1e3f62;
+      --gold: #d4a373;
+      --gold-light: #e9d5b5;
+      --red: #c93c20;
+      --red-light: #f8d7d0;
+      --cream: #f8f4ed;
+      --white: #ffffff;
+      --gray-50: #f9fafc;
+      --gray-100: #f2f4f8;
+      --gray-200: #e9ecf0;
+      --gray-600: #4a5568;
+      --gray-800: #1e293b;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 12px 28px -8px rgba(0, 40, 80, 0.15);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 40, 80, 0.3);
+      --shadow-xl: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.5;
+    }
+
+    /* ----- HEADER (exact structure preserved) ----- */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 0.7rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .logo-img {
+      height: 80px;
+      filter: brightness(1.05);
+    }
+
+    .header-text h4 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.9;
+      font-family: 'Abril Fatface', cursive;
+      justify-items: left;
+    }
+
+    .header-text hr {
+      width: 130px;
+      border: none;
+      height: 1px;
+      background: var(--white);
+      margin: 4px 5;
+      
+    }
+    
+    .help-btn {
+      background: #FFFEFE;
+      border: 1px solid rgba(255, 255, 255, 1);
+      color: #2D48C6;
+      font-weight: 100;
+      padding: 0.4rem 1rem;
+      border-radius: 12px;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.8rem;
+    }
+
+    .help-btn:hover {
+      background: rgba(0, 0, 0, 0.99);
+      border-color: var(--blue);
+    }
+
+    .help-btn i {
+      transition: transform 0.4s;
+    }
+
+    /* ----- LOGIN BUTTON & DROPDOWN (fully functional) ----- */
+    .login-container {
+      position: relative;
+    }
+
+    .login-btn {
+      background: #FFFEFE;
+      border: 1px solid rgba(255, 255, 255, 1);
+      color: #2D48C6;
+      font-weight: 900;
+      padding: 0.6rem 1rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.8rem;
+    }
+
+    .login-btn:hover {
+      background: rgba(0, 0, 0, 0.99);
+      border-color: var(--blue);
+    }
+
+    .login-btn i {
+      transition: transform 0.4s;
+    }
+
+    .login-btn[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .login-panel {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      width: 300px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow-xl);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      border-top: 4px solid var(--blue);
+      z-index: 200;
+    }
+
+    .login-panel.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .login-header {
+      padding: 1.8rem 1.8rem 0.8rem;
+    }
+
+    .login-header h3 {
+      color: var(--navy);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .login-header p {
+      color: #5f6b7a;
+      font-size: 0.9rem;
+    }
+
+    .login-options {
+      padding: 0.5rem 1.8rem;
+    }
+
+    .login-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      color: #1e293b;
+      text-decoration: none;
+      border-bottom: 1px solid #e9edf2;
+      transition: 0.2s;
+    }
+
+    .login-option i {
+      color: var(--blue);
+      width: 28px;
+      font-size: 1.2rem;
+    }
+
+    .login-option span {
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .login-option small {
+      color: #6f7d8c;
+      font-size: 0.8rem;
+    }
+
+    .login-option:hover {
+      background: var(--cream);
+      transform: translateX(5px);
+    }
+
+    .login-footer {
+      padding: 1.2rem 1.8rem 1.8rem;
+      text-align: right;
+    }
+
+    .cancel-btn {
+      background: none;
+      border: 1px solid #d0d9e2;
+      color: var(--navy);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s;
+    }
+
+    .cancel-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+
+    /* ----- NAVIGATION BAR ----- */
+    .nav-bar {
+      background: white;
+      padding: 0.6rem 5%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 90;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--black);
+      font-weight: 950;
+      padding: 0.6rem 1rem;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    /* vertical line between buttons */
+    .nav-btn:first-child::before {
+      content: '';
+      position: absolute;
+      right: -0.4rem;
+      top: 0%;
+      height: 110%;
+      width: 1px;
+      background: #cbd5e1;
+    }
+/* vertical line between buttons */
+.nav-btn:first-child::after {
+  content: '';
+  position: absolute;
+  left: 60vw; 89%;
+  top: 0%;
+  height: 110%;
+  width: 1px;
+  background: #cbd5e1;
+}
+
+    .nav-btn:hover {
+      background: var(--cream);
+      color: var(--red);
+    }
+
+    /* ----- SIDEBAR (half-screen, functional) ----- */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 300;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 95px;
+      left: -500px;
+      width: 400px;
+      max-width: 75vw;
+      height: 70%;
+      background: white;
+      transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 400;
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+      border-right: 4px solid var(--navy);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 2rem 2rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h2 {
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--red);
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+
+    .sidebar-close:hover {
+      background: var(--red-light);
+    }
+
+    .sidebar-nav {
+      padding: 1rem 2rem 2rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      color: #334155;
+      text-decoration: none;
+      border-bottom: 1px solid #edf2f7;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .sidebar-nav a i {
+      color: var(--navy);
+      width: 28px;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--navy);
+      transform: translateX(8px);
+    }
+
+    .sidebar-footer {
+      padding: 1rem 2rem 2rem;
+      text-align: center;
+    }
+
+    /* ----- SEARCH BAR ----- */
+    .search-section {
+      background: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .search-section.active {
+      max-height: 120px;
+    }
+
+    .search-container {
+      padding: 1.2rem 5%;
+    }
+
+    .search-box {
+      background: var(--gray-100);
+      border-radius: 60px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #dce3ec;
+    }
+
+    .search-box i {
+      color: var(--navy);
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    /* ===== HERO SECTION – SHORTER RECTANGULAR CARDS, EACH WITH DISTINCT COLOR ===== */
+    .hero-section {
+      background: linear-gradient(rgba(0, 51, 68, 0.25), rgba(0, 51, 68, 0.2)),
+                  url('https://i.ibb.co/BKqpBdP8/IMG-20260301-WA0002.jpg') center 30% / cover;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      position: relative;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width:1200px;
+      width: 100%;
+    }
+
+    .hero-card {
+      border-radius: 5px;
+      padding: 1rem 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      background: white;
+      border-bottom: 5px solid transparent;
+    }
+
+    /* distinct bottom border colors */
+    .hero-card:nth-child(1) {
+      border-bottom-color: #560E98;
+    }
+    .hero-card:nth-child(2) {
+      border-bottom-color: #87211B;
+    }
+    .hero-card:nth-child(3) {
+      border-bottom-color: #1B8781;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(20, 64, 120, 1);
+    }
+
+    .hero-card i {
+      font-size: 1.2rem;
+      color: inherit;
+      margin-bottom: 5px;
+    }
+
+    /* icon and link colors match border */
+    .hero-card:nth-child(1) i,
+    .hero-card:nth-child(1) a {
+      color: #560E98;
+    }
+    .hero-card:nth-child(2) i,
+    .hero-card:nth-child(2) a {
+      color: #87211B;
+    }
+    .hero-card:nth-child(3) i,
+    .hero-card:nth-child(3) a {
+      color: #1B8781;
+    }
+
+    .hero-card h3 {
+      font-size: 1.5rem;
+      color: #000;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .hero-card p {
+      color: #333;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      flex: 1;
+      font-weight: 410;
+    }
+
+    .hero-card a {
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      transition: 0.2s;
+    }
+
+    .hero-card a:hover {
+      gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== POPULAR TOPICS ===== */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 5%;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      color: #000;
+      font-size: 1.5rem;
+      font-weight: 700;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .section-header h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom, var(navy), var(--navy));
+      border-radius: 3px;
+    }
+
+    .section-link {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 1.8rem;
+      border-radius: 60px;
+      background: var(--cream);
+      transition: 0.2s;
+    }
+
+    .section-link:hover {
+      background: var(--navy-light);
+      color: white;
+    }
+
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+
+    .topic-card {
+      background: #f5f5f5; /* light grey */
+      border-radius: 5px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      border-bottom: 7.5px solid #ddd;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-color: var(--navy);
+    }
+
+    .topic-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .topic-icon i {
+      font-size: 1.2rem;
+      color: #9A9A9A;
+    }
+
+    .topic-card h4 {
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .topic-card p {
+      color: #4a4a4a;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .topic-tag {
+      color: var(--navy);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .topic-tag:hover {
+      gap: 0.8rem;
+      color: #000;
+    }
+
+    /* ===== FEATURE CARDS – WITH IMAGES ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-bottom: 7.5px solid var(--navy);
+    }
+
+    .feature-image {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-content {
+      padding: 1.5rem;
+    }
+
+    .feature-content h4 {
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-content p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .feature-link {
+      color: var(--navy-light);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    .feature-link:hover {
+      gap: 0.8rem;
+      color: var(--navy);
+    }
+
+    /* ===== HELP SECTION (fixed with consistent buttons) ===== */
+    .help-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .help-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .help-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .help-card i {
+      font-size: 3rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .help-card h3 {
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .help-card p {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .help-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--navy-light);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--navy-light);
+      border-radius: 60px;
+      transition: 0.2s;
+    }
+
+    .help-card a:hover {
+      background: var(--gold);
+      color: white;
+    }
+
+    /* ===== AUTHENTIC FOOTER – COLUMN LINKS, SOCIAL, ACKNOWLEDGMENT ===== */
+    .footer {
+      background: #160925;
+      color: white;
+      padding: 3rem 5% 2rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-column h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .footer-column h4 i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-column h4 i.rotate {
+      transform: rotate(180deg);
+    }
+
+    .footer-column ul {
+      list-style: none;
+      max-height: 300px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .footer-column ul.collapsed {
+      max-height: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-column a {
+      color: #b7c9dd;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+    }
+
+    .footer-acknowledgement {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #b7c9dd;
+      font-size: 0.9rem;
+    }
+
+    .footer-acknowledgement i {
+      font-size: 2.5rem;
+      color: var(--gold);
+    }
+
+    .footer-copyright {
+      text-align: center;
+      border-top: 1px solid #3a5a7a;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+      color: #b7c9dd;
+    }
+
+    .footer-copyright a {
+      color: #b7c9dd;
+      text-decoration: none;
+    }
+
+    .footer-copyright a:hover {
+      color: var(--gold);
+    }
+
+    /* ----- FIXED CHAT & REPORT (modern professional) ----- */
+    .chat-bubble {
+      position: fixed;
+      bottom: 5px;
+      right: 5px;
+      background: var(--navy);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      border: 2px solid var(--gold);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 200;
+      font-weight: 100;
+      cursor: pointer;
+    }
+
+    .report-bubble {
+      position: fixed;
+      bottom: 5px;
+      left: 5px;
+      background: linear-gradient(135deg, #2d4b6e, #1e3f62);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      border: none;
+      box-shadow: var(--shadow-lg), 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 200;
+      font-weight: 100;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: var(--transition);
+    }
+
+    .report-bubble:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient(135deg, #1e3f62, #0f2a44);
+    }
+
+    .report-bubble i {
+      font-size: 1rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .popular-grid, .feature-grid, .footer-columns, .help-section {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .popular-grid, .feature-grid, .footer-columns, .help-section {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        width: 100%;
+        left: -100%;
+      }
+
+      .header-text hr {
+        width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (buttons fully functional) -->
+  <header>
+    <div class="header-left">
+      <img src="https://i.ibb.co/jPd83cjL/02052025-Medicare.png" alt="ATO" class="logo-img">
+      <div class="header-text">
+        <h4>Australian Government</h4>
+        <hr>
+        <h4>Australian Taxation Office</h4>
+      </div>
+    </div>
+
+    <div class="login-container">
+      <button class="login-btn" id="loginButton" aria-expanded="false">
+        Log in <i class="fas fa-chevron-down"></i>
+      </button>
+
+      <div class="login-panel" id="loginPanel">
+        <div class="login-header">
+          <h3>Welcome back</h3>
+          <p>Access your ATO online services</p>
+        </div>
+        <div class="login-options">
+          <a href="path.html" class="login-option"><i class="fas fa-user"></i><span>Individuals & sole traders</span> <i class="fas fa-circle-chevron-right"></i> <small>myGov</small></a>
+          <a href="path.html" class="login-option"><i class="fas fa-building"></i><span>Business & organisations</span><i class="fas fa-circle-chevron-right"></i><small>BAS, PAYG</small></a>
+          <a href="path.html" class="login-option"><i class="fas fa-user-tie"></i><span>Tax & BAS agents</span><i class="fas fa-circle-chevron-right"></i><small>Agent portal</small></a>
+          <a href="#" class="login-option"><i class="fas fa-piggy-bank"></i><span>Super funds</span><i class="fas fa-circle-chevron-right"></i><small>ATO online</small></a>
+          <a href="#" class="login-option"><i class="fas fa-globe"></i><span>Non-residents</span><i class="fas fa-circle-chevron-right"></i><small>AusID</small></a>
+        </div>
+        <div class="login-footer">
+          <button class="cancel-btn" id="cancelLogin"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-bar">
+    <button class="nav-btn" id="menuButton"><i class="fas fa-bars"></i> Menu</button>
+    <button class="nav-btn" id="searchButton"><i class="fas fa-search"></i> Search</button>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-nav">
+      <a href="#"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-users"></i> Individuals and families<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-building"></i> Businesses and organisations<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-user-tie"></i> Tax and super professionals<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-comments"></i> ATO Community<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-gavel"></i> Legal database<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-newspaper"></i> What's New<i class="fas fa-circle-chevron-right"></i></a>
+    </div>
+    <div class="sidebar-footer">
+      <button class="cancel-btn" id="sidebarCloseBtn"><i class="fas fa-times"></i> Close menu</button>
+    </div>
+  </div>
+
+  <div class="search-section" id="searchSection">
+    <div class="search-container">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search ato.gov.au — tax return, myGov, super...">
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO – shorter rectangular cards, distinct colors, left-aligned -->
+  <section class="hero-section">
+    <div class="card-container">
+      <div class="hero-card">
+       
+        <h3>Individuals & Families</h3>
+        <p>Manage tax returns, super, payments and myGov linkage securely.</p>
+        <a href="path.html">Explore now <i class="fas fa-circle-chevron-right"></i></a>
+      </div>
+      <div class="hero-card">
+    
+        <h3>Business & Organisations</h3>
+        <p>Handle BAS, FBT, payroll super and employer obligations.</p>
+        <a href="#">Business tools <i class="fas fa-circle-chevron-right"></i></a>
+      </div>
+      <div class="hero-card">
+        
+        <h3>Tax & Super Professionals</h3>
+        <p>Agent portals, compliance guidance and client resources.</p>
+        <a href="#">Professional hub <i class="fas fa-circle-chevron-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR TOPICS -->
+  <div class="container">
+    <div class="section-header">
+      <h2>Popular topics</h2>
+    </div>
+    <div class="popular-grid">
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-id-card"></i></div><h4>Tax file number</h4><p>Apply, update or replace your TFN. Keep your details safe.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-user-check"></i></div><h4>myGov account</h4><p>Create and link your myGov account to ATO online services.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-clock"></i></div><h4>Payday Super</h4><p>Employer obligations: pay super on time, every time.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-credit-card"></i></div><h4>Paying the ATO</h4><p>Easy payment options and what happens if you don't pay.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-file-invoice"></i></div><h4>Your tax return</h4><p>Lodge online, track progress, or get help from a tax agent.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+      <div class="topic-card"><div class="topic-icon"><i class="fas fa-hand-holding-heart"></i></div><h4>Support in difficult times</h4><p>Help when you're affected by natural disaster or crisis.</p><a href="#" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
+    </div>
+  </div>
+
+  <!-- FEATURE CARDS – with authentic images -->
+  <div class="container">
+    <div class="section-header">
+      <h2>What's new</h2>
+      <a href="#" class="section-link">All updates <i class="fas fa-circle-chevron-right"></i></a>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <img class="feature-image" src="https://i.ibb.co/3m050zLc/Image1.png" alt="ATO app on mobile">
+        <div class="feature-content"><a href="#"><h4>It’s your tax and super in your pocket</h4></a>
+        <p>Download the ATO app to manage your tax and super on the go.</p><a href="#" class="feature-link">Download <i class="fas fa-circle-chevron-right"></i></a></div>
+      </div>
+      <div class="feature-card">
+        <img class="feature-image" src="https://i.ibb.co/WpYSDY4W/ato-gov-au-homepage-Standard-card-314-x-182px.png" alt="FBT advertising">
+        <div class="feature-content"><a href="#"><h4>The FBT year ends on 31 March...are you ready?</h4></a>
+<p>Providing perks to your employees may attract fringe benefits tax (FBT). Make sure you know what to do this FBT tax time.</p><a href="#" class="feature-link">FBT essentials <i class="fas fa-circle-chevron-right"></i></a></div>
+      </div>
+      <div class="feature-card">
+        <img class="feature-image" src="https://i.ibb.co/WNTncJQH/DE-68085-Standard-Card-314x182.jpg" alt="Scam protection">
+        <div class="feature-content"><a href="#"> <h4>Don’t let a scammer piece together your identity</h4></a>
+        <p>How to protect your information from falling into the wrong hands.</p><a href="#" class="feature-link">Stay safe <i class="fas fa-circle-chevron-right"></i></a></div>
+      </div>
+      <div class="feature-card">
+        <img class="feature-image" src="https://i.ibb.co/TxgG0j3W/DE-64928-Worker-group-with-super-pigs-314-x-182-Digital-144dpi.jpg" alt="Super piggy banks">
+        <div class="feature-content"> <a href="#"> <h4>Understand your super obligations as an employer</h4></a>
+        <p>Understand how much, when and how to pay super to your employees. Our guidance includes checklists and an online course.</p><a href="#" class="feature-link">Employer hub <i class="fas fa-circle-chevron-right"></i></a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HELP SECTION (fixed with consistent cards and circle-chevron-right) -->
+  <section class="help-section">
+    <div class="help-card">
+      <i class="fas fa-message"></i>
+      <h3>Online services</h3>
+      <p>Use online services to access tax and super records. Find technical support, systems advice and online security tips.</p>
+      <a href="#">Online services <i class="fas fa-circle-chevron-right"></i></a>
+    </div>
+    <div class="help-card">
+      <i class="fas fa-circle-info"></i>
+      <h3>Calculators and tools</h3>
+      <p>Find calculators and tools to help you with your tax and super. You can filter results by audience, topic and year.</p>
+      <a href="#">Calculators and tools <i class="fas fa-circle-chevron-right"></i></a>
+    </div>
+  </section>
+
+  <!-- AUTHENTIC FOOTER with columns, social, acknowledgment, and dropdown chevrons -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>Tools <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">Media centre</a></li>
+            <li><a href="#">Forms and instructions</a></li>
+            <li><a href="#">Tax rates and codes</a></li>
+            <li><a href="#">Calculators and tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Tax information for <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">People with disability</a></li>
+            <li><a href="#">Aboriginal and Torres Strait Islander peoples</a></li>
+            <li><a href="#">Norfolk Island</a></li>
+            <li><a href="#">Other languages</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Help and support <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">Top call centre questions</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Identity security and scams</a></li>
+            <li><a href="#">Financial difficulties</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>About ATO <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">ATOtv</a></li>
+            <li><a href="#">Indigenous badge</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <div class="footer-acknowledgement">
+        <i class="fas fa-pagelines"></i>
+        <span>We acknowledge the Traditional Owners and Custodians of Country throughout Australia and their continuing connection to land, waters and community. We pay our respects to them, their cultures, and Elders past and present.</span>
+      </div>
+
+      <div class="footer-copyright">
+        <a href="#">© Commonwealth of Australia</a> | <a href="#">View related websites</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FIXED CHAT & REPORT (modern professional) -->
+  <div class="chat-bubble"><i class="fas fa-comment-dots"></i> Ask 🙋</div>
+  <div class="report-bubble"><i class="fas fa-exclamation-triangle"></i> Report issue</div>
+
+  <script>
+    (function() {
+      // Login dropdown - fully functional
+      const loginBtn = document.getElementById('loginButton');
+      const loginPanel = document.getElementById('loginPanel');
+      const cancelLogin = document.getElementById('cancelLogin');
+
+      function toggleLogin(show) {
+        loginPanel.classList.toggle('active', show);
+        loginBtn.setAttribute('aria-expanded', show);
+      }
+
+      loginBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleLogin(!loginPanel.classList.contains('active'));
+      });
+
+      cancelLogin.addEventListener('click', () => toggleLogin(false));
+
+      document.addEventListener('click', (e) => {
+        if (!loginBtn.contains(e.target) && !loginPanel.contains(e.target)) {
+          toggleLogin(false);
+        }
+      });
+
+      // Sidebar - fully functional
+      const menuBtn = document.getElementById('menuButton');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+
+      function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebarFunc() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      menuBtn.addEventListener('click', openSidebar);
+      closeSidebar.addEventListener('click', closeSidebarFunc);
+      sidebarCloseBtn.addEventListener('click', closeSidebarFunc);
+      overlay.addEventListener('click', closeSidebarFunc);
+
+      // Search bar - fully functional
+      const searchBtn = document.getElementById('searchButton');
+      const searchSection = document.getElementById('searchSection');
+
+      searchBtn.addEventListener('click', () => {
+        searchSection.classList.toggle('active');
+      });
+
+      // Footer dropdown functionality
+      const footerHeaders = document.querySelectorAll('.footer-column h4');
+      footerHeaders.forEach(header => {
+        const icon = header.querySelector('i');
+        const ul = header.nextElementSibling;
+        // Initially ensure ul is visible (max-height set by CSS)
+        ul.classList.remove('collapsed');
+        icon.classList.remove('rotate');
+
+        header.addEventListener('click', () => {
+          ul.classList.toggle('collapsed');
+          icon.classList.toggle('rotate');
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
