@@ -764,11 +764,12 @@
             </div>
         </div>
         <div class="help-wrapper">
-            <a href="#" class="help-link" id="helpBtn">Help</a>
+            <a href="help.html" class="help-link" id="helpBtn">Help</a>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
+    <div class="main-content">
         <!-- LOGIN SCREEN (visible initially) - COMPLETELY UNCHANGED -->
         <div class="login-card" id="loginScreen">
             <br>
@@ -799,7 +800,7 @@
             </div>
 
             <div class="learn-passkey">
-                <a href="#" id="learnPasskeyLink"><i class="fas fa-circle-info"></i> Learn about passkeys <i class="fas fa-external-link-alt"></i></a>
+                <a href="help.html#passkeys" id="learnPasskeyLink"><i class="fas fa-circle-info"></i> Learn about passkeys <i class="fas fa-external-link-alt"></i></a>
             </div>
 
             <div class="divider">
@@ -818,7 +819,7 @@
                         <input type="text" id="username" placeholder="Enter your username or email" value="demo.user@example.com">
                     </div>
                     <div class="forgot-row">
-                        <span class="forgot-link" id="forgotUsername">Forgotten username?</span>
+                        <a href="help.html#contact" class="forgot-link" id="forgotUsername">Forgotten username?</a>
                     </div>
                 </div>
 
@@ -832,7 +833,7 @@
                 </div>
 
                 <div class="forgot-row">
-                    <span class="forgot-link" id="forgotPassword">Forgotten password?</span>
+                    <a href="help.html#contact" class="forgot-link" id="forgotPassword">Forgotten password?</a>
                 </div>
 
                 <button type="submit" class="signin-button" id="signInBtn">
@@ -846,13 +847,13 @@
             </form>
 
             <div class="footer-links">
-                <a href="#" id="privacy">Privacy</a>
-                <a href="#" id="terms">Terms of use</a>
-                <a href="#" id="accessibility">Accessibility</a>
-                <a href="#" id="contact">Contact us</a>
+                <a href="privacypolicy.html" id="privacy">Privacy</a>
+                <a href="help.html#terms" id="terms">Terms of use</a>
+                <a href="help.html#accessibility" id="accessibility">Accessibility</a>
+                <a href="help.html#contact" id="contact">Contact us</a>
             </div>
         </div>
-    
+    </div>
 
     <!-- SIMPLE MODAL CONTAINER - Verification -->
     <div class="modal-overlay" id="verifyModal">
@@ -1100,21 +1101,61 @@
             document.getElementById('resendLink').addEventListener('click', resendAction);
         }
 
-        // Demo links (silent)
-        const demoLinks = [
-            'digitalIdOption', 'passkeyOption', 'learnPasskeyLink', 
-            'forgotUsername', 'forgotPassword', 'createAccountLink',
-            'privacy', 'terms', 'accessibility', 'contact', 'helpBtn'
-        ];
+        // Make all anchor links work normally (remove preventDefault)
+        // We want them to navigate to help.html with proper hash links
         
-        demoLinks.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                });
-            }
+        // Help button is already an <a> tag, so it works
+        
+        // Learn about passkeys link
+        document.getElementById('learnPasskeyLink').addEventListener('click', function(e) {
+            // Let the default behavior happen (navigate to help.html#passkeys)
+            // No preventDefault
         });
+
+        // Footer links - let them navigate normally
+        document.getElementById('privacy').addEventListener('click', function(e) {
+            // Navigate to privacypolicy.html
+        });
+        
+        document.getElementById('terms').addEventListener('click', function(e) {
+            // Navigate to help.html#terms
+        });
+        
+        document.getElementById('accessibility').addEventListener('click', function(e) {
+            // Navigate to help.html#accessibility
+        });
+        
+        document.getElementById('contact').addEventListener('click', function(e) {
+            // Navigate to help.html#contact
+        });
+
+        // Forgot username/password links
+        document.getElementById('forgotUsername').addEventListener('click', function(e) {
+            // Navigate to help.html#contact
+        });
+        
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            // Navigate to help.html#contact
+        });
+
+        // Digital ID and Passkey options - keep silent (demo)
+        document.getElementById('digitalIdOption').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Silent demo
+        });
+        
+        document.getElementById('passkeyOption').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Silent demo
+        });
+
+        // Create account link - keep silent
+        document.getElementById('createAccountLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Silent demo
+        });
+
+        // Help button already works
     </script>
 </body>
 </html>

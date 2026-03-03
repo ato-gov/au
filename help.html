@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myGov – Help & Support</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        .gov-header {
+            background-color: #65D3EE;
+            padding: 0 5%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .header-left-group {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            height: 100%;
+        }
+
+        .mygov-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            height: 100%;
+            padding: 0px 0;
+        }
+
+        .mygov-badge img {
+            width: auto;
+            height: 68px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .help-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            margin-left: auto;
+        }
+
+        .help-link {
+            color: #000000;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 12px;
+            white-space: nowrap;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .help-link:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 24px;
+            background: #f0f2f5;
+            width: 100%;
+        }
+
+        .help-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 40px 48px;
+        }
+
+        /* Back link */
+        .back-nav {
+            margin-bottom: 24px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #003366;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link i {
+            font-size: 12px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #65D3EE;
+        }
+
+        /* Section styling - each has ID for linking */
+        .help-section {
+            margin-bottom: 48px;
+            scroll-margin-top: 30px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #65D3EE;
+            font-size: 24px;
+        }
+
+        /* Topic cards */
+        .topic-card {
+            background: #f8fafd;
+            border: 1px solid #e9eef4;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .topic-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .topic-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e2d49;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topic-card h3 i {
+            color: #65D3EE;
+            width: 24px;
+        }
+
+        .topic-card p {
+            color: #4a5f7a;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .topic-card ul, .topic-card ol {
+            margin-left: 34px;
+            margin-bottom: 10px;
+            color: #4a5f7a;
+        }
+
+        .topic-card li {
+            margin-bottom: 6px;
+        }
+
+        .simple-box {
+            background: white;
+            border-left: 3px solid #65D3EE;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-top: 16px;
+            border: 1px solid #e2eaf5;
+        }
+
+        /* Contact grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            background: #f8fafd;
+            border: 1px solid #e2eaf5;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contact-item i {
+            font-size: 28px;
+            color: #003366;
+            margin-bottom: 12px;
+        }
+
+        .contact-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e2d49;
+            margin-bottom: 8px;
+        }
+
+        .contact-item p {
+            color: #5e6f8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .contact-detail {
+            font-weight: 600;
+            color: #003366;
+            font-size: 15px;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #e2eaf5;
+            text-align: center;
+            color: #7c8ba5;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .help-container {
+                padding: 24px 20px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="gov-header">
+        <div class="header-left-group">
+            <div class="mygov-badge">
+                <img src="https://i.ibb.co/Xf6XmGYg/In-Shot-20260303-132243446.png" alt="Australian Government">
+            </div>
+            <div class="mygov-badge">
+                <img src="https://i.ibb.co/2Lw8xCq/In-Shot-20260303-132449035.png" alt="myGov">
+            </div>
+        </div>
+        <div class="help-wrapper">
+            <a href="#" class="help-link">Help</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="help-container">
+            <div class="back-nav">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to sign in
+                </a>
+            </div>
+
+            <h1>Help & Support</h1>
+
+            <!-- TERMS OF USE SECTION - ID for linking -->
+            <section id="terms" class="help-section">
+                <div class="section-title">
+                    <i class="fas fa-file-contract"></i> Terms of Use
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-check-circle"></i> Acceptance</h3>
+                    <p>By accessing or using myGov, you agree to be bound by these Terms. You must be 18 years or older and provide accurate information.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-shield-alt"></i> Account Security</h3>
+                    <p>You are responsible for maintaining the confidentiality of your password and verification methods. Notify us immediately of any unauthorized access.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-lock"></i> Privacy</h3>
+                    <p>Your personal information is protected under the Privacy Act 1988. We only collect data necessary for verification and service delivery.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-clock"></i> Updates</h3>
+                    <p>Terms may be updated with 30 days notice. Continued use of myGov constitutes acceptance of revised terms.</p>
+                </div>
+            </section>
+
+            <!-- ACCESSIBILITY SECTION - ID for linking -->
+            <section id="accessibility" class="help-section">
+                <div class="section-title">
+                    <i class="fas fa-universal-access"></i> Accessibility
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-eye"></i> Visual</h3>
+                    <p>Screen reader compatible (JAWS, NVDA, VoiceOver). High contrast mode available (Ctrl+U). Adjust text size using browser zoom.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-ear-deaf"></i> Hearing</h3>
+                    <p>Closed captions on videos. SMS and email verification options. National Relay Service: 1800 555 630.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-hand-paper"></i> Motor & Cognitive</h3>
+                    <p>Full keyboard navigation support. Extended session timeouts available. Clear, simple language with descriptive error messages.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-language"></i> Language Assistance</h3>
+                    <p>Translator services: Arabic 1300 123 457, Chinese 1300 123 458, Vietnamese 1300 123 459, Greek 1300 123 460.</p>
+                </div>
+            </section>
+
+            <!-- LEARN ABOUT PASSKEYS SECTION - ID for linking -->
+            <section id="passkeys" class="help-section">
+                <div class="section-title">
+                    <i class="fas fa-key"></i> Learn About Passkeys
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-question-circle"></i> What are passkeys?</h3>
+                    <p>Passkeys are a secure replacement for passwords using your device's biometrics (fingerprint, face scan, or PIN). They're phishing-resistant and unique per site.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-device"></i> How to set up</h3>
+                    <ol>
+                        <li>Sign in to myGov with your password</li>
+                        <li>Go to Account Settings > Security</li>
+                        <li>Select "Create a passkey"</li>
+                        <li>Follow your device prompts (fingerprint/face/PIN)</li>
+                    </ol>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-sync-alt"></i> Compatible devices</h3>
+                    <p>iOS 16+, Android 9+, Windows 11, macOS 13+. Syncs via iCloud Keychain, Google Password Manager, or Windows Hello.</p>
+                </div>
+
+                <div class="topic-card">
+                    <h3><i class="fas fa-tools"></i> Troubleshooting</h3>
+                    <p>Lost device? Sign in with password and create a new passkey. Ensure biometrics are enabled in device settings.</p>
+                </div>
+            </section>
+
+            <!-- CONTACT US SECTION - ID for linking -->
+            <section id="contact" class="help-section">
+                <div class="section-title">
+                    <i class="fas fa-headset"></i> Contact Us
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <h4>Phone</h4>
+                        <p>Mon-Fri, 8am-8pm AEST</p>
+                        <div class="contact-detail">13 23 68</div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-comment-dots"></i>
+                        <h4>Live Chat</h4>
+                        <p>24/7, 2 min response</p>
+                        <div class="contact-detail">Available now</div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>24 hour response</p>
+                        <div class="contact-detail">support@mygov.gov.au</div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Security</h4>
+                        <p>24/7 hotline</p>
+                        <div class="contact-detail">1800 221 122</div>
+                    </div>
+                </div>
+
+                <div class="simple-box">
+                    <p><i class="fas fa-map-marker-alt" style="color: #003366; margin-right: 8px;"></i> <strong>Postal:</strong> GPO Box 1234, Canberra ACT 2601, Australia</p>
+                </div>
+            </section>
+
+            <div class="footer-note">
+                © 2026 Australian Government | myGov
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-scroll to section if URL has hash -->
+    <script>
+        // Automatically scroll to section when page loads with hash in URL
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
