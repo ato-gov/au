@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your privacy | Australian Taxation Office</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ----- DESIGN SYSTEM (homepage) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #3844CA;
+      --navy-light: #1e3f62;
+      --gold: #d4a373;
+      --gold-light: #e9d5b5;
+      --red: #c93c20;
+      --red-light: #f8d7d0;
+      --cream: #f8f4ed;
+      --white: #ffffff;
+      --gray-50: #f9fafc;
+      --gray-100: #f2f4f8;
+      --gray-200: #e9ecf0;
+      --gray-600: #4a5568;
+      --gray-800: #1e293b;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 12px 28px -8px rgba(0, 40, 80, 0.15);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 40, 80, 0.3);
+      --shadow-xl: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--gray-800);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+   
+
+    /* ----- HEADER (homepage) ----- */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 0.7rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .logo-img {
+      height: 80px;
+      filter: brightness(1.05);
+    }
+
+    .header-text h4 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.9;
+      font-family: 'Abril Fatface', cursive;
+    }
+
+    .header-text hr {
+      width: 130px;
+      border: none;
+      height: 1px;
+      background: white;
+      margin: 4px 0;
+    }
+
+    /* ----- LOGIN BUTTON & DROPDOWN (fully functional) ----- */
+    .login-container {
+      position: relative;
+    }
+
+    .login-btn {
+      background: #FFFEFE;
+      border: 1px solid rgba(255, 255, 255, 1);
+      color: #2D48C6;
+      font-weight: 900;
+      padding: 0.6rem 1rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.8rem;
+    }
+
+    .login-btn:hover {
+      background: rgba(0, 0, 0, 0.99);
+      border-color: var(--blue);
+    }
+
+    .login-btn i {
+      transition: transform 0.4s;
+    }
+
+    .login-btn[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .login-panel {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      width: 300px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: var(--shadow-xl);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--transition);
+      border-top: 4px solid var(--blue);
+      z-index: 200;
+    }
+
+    .login-panel.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .login-header {
+      padding: 1.8rem 1.8rem 0.8rem;
+    }
+
+    .login-header h3 {
+      color: var(--navy);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .login-header p {
+      color: #5f6b7a;
+      font-size: 0.9rem;
+    }
+
+    .login-options {
+      padding: 0.5rem 1.8rem;
+    }
+
+    .login-option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      color: #1e293b;
+      text-decoration: none;
+      border-bottom: 1px solid #e9edf2;
+      transition: 0.2s;
+    }
+
+    .login-option i {
+      color: var(--blue);
+      width: 28px;
+      font-size: 1.2rem;
+    }
+
+    .login-option span {
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .login-option small {
+      color: #6f7d8c;
+      font-size: 0.8rem;
+    }
+
+    .login-option:hover {
+      background: var(--cream);
+      transform: translateX(5px);
+    }
+
+    .login-footer {
+      padding: 1.2rem 1.8rem 1.8rem;
+      text-align: right;
+    }
+
+    .cancel-btn {
+      background: none;
+      border: 1px solid #d0d9e2;
+      color: var(--navy);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s;
+    }
+
+    .cancel-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+     /* ----- NAV BAR (two vertical lines – after menu and after home) ----- */
+    .nav-bar {
+      background: white;
+      padding: 0.6rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 90;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--black);
+      font-weight: 800;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .nav-btn i {
+      font-size: 1rem;
+    }
+
+    .nav-btn:hover {
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    /* first vertical line after menu button */
+    .nav-btn:first-child::after {
+      content: '';
+      position: absolute;
+      right: -0.4rem;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: #cbd5e1;
+    }
+
+    .home-btn {
+      background: none;
+      border: none;
+      color: var(--black);
+      font-size: 1.1rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+    .home-btn:hover {
+      background: var(--cream);
+      color: var(--navy);
+    }
+    /* second vertical line after home button */
+    .home-btn::after {
+      content: '';
+      position: absolute;
+      right: -0.4rem;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: #cbd5e1;
+    }
+     /* ----- SIDEBAR ----- */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 300;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 95px;
+      left: -500px;
+      width: 400px;
+      max-width: 75vw;
+      height: 70%;
+      background: white;
+      transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 400;
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+      border-right: 4px solid var(--navy);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 2rem 2rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h2 {
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--red);
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+
+    .sidebar-close:hover {
+      background: var(--red-light);
+    }
+
+    .sidebar-nav {
+      padding: 1rem 2rem 2rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      color: #334155;
+      text-decoration: none;
+      border-bottom: 1px solid #edf2f7;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .sidebar-nav a i {
+      color: var(--navy);
+      width: 28px;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--navy);
+      transform: translateX(8px);
+    }
+
+    .sidebar-footer {
+      padding: 1rem 2rem 2rem;
+      text-align: center;
+    }
+
+    /* ----- SEARCH BAR (global toggle) ----- */
+    .global-search-section {
+      background: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .global-search-section.active {
+      max-height: 120px;
+    }
+    .global-search-container {
+      padding: 1.2rem 5%;
+    }
+    .global-search-box {
+      background: var(--gray-100);
+      border-radius: 60px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #dce3ec;
+    }
+    .global-search-box i {
+      color: var(--navy);
+    }
+    .global-search-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    /* ===== PRIVACY PAGE LAYOUT ===== */
+    .content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .page-header {
+      background: var(--navy);
+      color: white;
+      padding: 3rem 5% 2rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .page-header .meta {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 1rem;
+    }
+
+    .main-content {
+      background: var(--gray-50);
+      padding: 2rem 5% 4rem;
+    }
+
+    /* two-column layout for desktop */
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* side menu (table of contents) */
+    .side-menu {
+      position: sticky;
+      top: 2rem;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+    }
+    .side-menu h4 {
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gold);
+    }
+    .side-menu ul {
+      list-style: none;
+    }
+    .side-menu li {
+      margin-bottom: 0.5rem;
+    }
+    .side-menu a {
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: block;
+      padding: 0.4rem 0.5rem;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+    .side-menu a:hover {
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    /* content sections */
+    .privacy-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+    .privacy-section h2 {
+      color: var(--navy);
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      border-left: 6px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .privacy-section h3 {
+      color: var(--navy);
+      font-size: 1.2rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .privacy-section p, .privacy-section ul {
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+    }
+    .privacy-section ul {
+      padding-left: 2rem;
+    }
+    .privacy-section li {
+      margin-bottom: 0.3rem;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--gray-200);
+      margin-bottom: 1rem;
+    }
+    .accordion-title {
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      padding: 1rem 0;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1rem;
+    }
+    .accordion-title i {
+      transition: transform 0.3s;
+      color: var(--gold);
+    }
+    .accordion-title.open i {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      padding: 0 1rem;
+    }
+    .accordion-content.open {
+      max-height: 1000px; /* enough for large content */
+      padding-bottom: 1.5rem;
+    }
+
+    .appendix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    .appendix-table th, .appendix-table td {
+      border: 1px solid var(--gray-200);
+      padding: 0.8rem;
+      text-align: left;
+    }
+    .appendix-table th {
+      background: var(--cream);
+      color: var(--navy);
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      border-top: 1px solid var(--gray-200);
+      padding-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* responsive */
+    @media (max-width: 1000px) {
+      .privacy-grid {
+        grid-template-columns: 1fr;
+      }
+      .side-menu {
+        position: static;
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* ----- FOOTER (homepage dark purple) ----- */
+    .footer {
+      background: #160925;
+      color: white;
+      padding: 3rem 5% 2rem;
+    }
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-column h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .footer-column ul {
+      list-style: none;
+      max-height: 300px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .footer-column ul.collapsed {
+      max-height: 0;
+    }
+    .footer-column li {
+      margin-bottom: 0.7rem;
+    }
+    .footer-column a {
+      color: #b7c9dd;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+    }
+    .footer-acknowledgement {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #b7c9dd;
+      font-size: 0.9rem;
+    }
+    .footer-acknowledgement i {
+      font-size: 2.5rem;
+      color: var(--gold);
+    }
+    .footer-copyright {
+      text-align: center;
+      border-top: 1px solid #3a5a7a;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+      color: #b7c9dd;
+    }
+    .footer-copyright a {
+      color: #b7c9dd;
+      text-decoration: none;
+    }
+
+        /* ----- FIXED CHAT & REPORT (modern professional) ----- */
+    
+    .report-bubble {
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      background: var(--navy);
+      color: white;
+      padding: 0.2rem 0.3rem;
+      border-radius: 1px;
+      
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 400;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    
+    .report-bubble:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient var(black);
+    }
+    
+    .report-bubble i {
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <img src="https://i.ibb.co/jPd83cjL/02052025-Medicare.png" alt="ATO" class="logo-img">
+      <div class="header-text">
+        <h4>Australian Government</h4>
+        <hr>
+        <h4>Australian Taxation Office</h4>
+      </div>
+    </div>
+
+    <div class="login-container">
+      <button class="login-btn" id="loginButton" aria-expanded="false">
+        Log in <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="login-panel" id="loginPanel">
+        <div class="login-header">
+          <h3>Welcome back</h3>
+          <p style="color:#5f6b7a; font-size:0.9rem;">Access your ATO online services</p>
+        </div>
+        <div class="login-options">
+          <a href="loginmygov.html" class="login-option"><i class="fas fa-user"></i><span>Individuals </span> <i class="fas fa-external-link-alt"></i><small>myGov</small></a>
+          <a href="loginmygov.html" class="login-option"><i class="fas fa-building"></i><span>Business</span><i class="fas fa-external-link-alt"></i><small>BAS, PAYG.</small></a>
+          <a href="loginmygov.html" class="login-option"><i class="fas fa-user-tie"></i><span>Agents</span><i class="fas fa-external-link-alt"></i><small>Agent portal</small></a>
+          <a href="loginmygov.html" class="login-option"><i class="fas fa-piggy-bank"></i><span>Super funds</span><i class="fas fa-external-link-alt"></i><small>ATO online</small></a>
+          <a href="loginmygov.html" class="login-option"><i class="fas fa-globe"></i><span>Non-residents</span><i class="fas fa-external-link-alt"></i><small>AusID</small></a>
+        </div>
+        <div class="login-footer">
+          <button class="cancel-btn" id="cancelLogin"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV BAR (two vertical lines) -->
+  <div class="nav-bar">
+    <div class="nav-left">
+      <button class="nav-btn" id="menuButton"><i class="fas fa-bars"></i> Menu</button>
+    </div>
+    <div class="nav-center">
+      <button class="home-btn" id="homeButton"><i class="fas fa-home"></i></button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="searchButton"><i class="fas fa-search"></i> Search</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home <i class="fas fa-circle-chevron-right"></i></a>
+      <a href="path.html"><i class="fas fa-users"></i> Individuals and families<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="business.html"><i class="fas fa-building"></i> Businesses and organisations<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="tax-professionals.html"><i class="fas fa-user-tie"></i> Tax and super professionals<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="community.html"><i class="fas fa-comments"></i> ATO Community<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-gavel"></i> Legal database<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="newsarticle.html"><i class="fas fa-newspaper"></i> What's New <i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#" style="font-weight: 700; color: var(--navy);"><i class="fas fa-shield-alt"></i> Your privacy</a>
+    </div>
+    <div class="sidebar-footer">
+      <button class="cancel-btn" id="sidebarCloseBtn"><i class="fas fa-times"></i> Close menu</button>
+    </div>
+  </div>
+
+  <!-- GLOBAL SEARCH (toggles) -->
+  <div class="global-search-section" id="globalSearchSection">
+    <div class="global-search-container">
+      <div class="global-search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search ato.gov.au — tax return, myGov, super...">
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h1>Your privacy</h1>
+      <p>ATO privacy policy – how we handle your personal information.</p>
+      <div class="meta">Last updated 18 February 2026</div>
+    </div>
+
+    <div class="main-content" id="main">
+      <div class="privacy-grid">
+        <!-- Side menu (table of contents) -->
+        <aside class="side-menu">
+          <h4>On this page</h4>
+          <ul>
+            <li><a href="#about">About our privacy policy</a></li>
+            <li><a href="#privacy-act">The Privacy Act</a></li>
+            <li><a href="#undertaking">Our undertaking to you</a></li>
+            <li><a href="#why">Why we collect, hold, use and disclose</a></li>
+            <li><a href="#what">Personal information we collect</a></li>
+            <li><a href="#how-collect">How we collect</a></li>
+            <li><a href="#how-hold">How we hold</a></li>
+            <li><a href="#matching">Data matching and exchange</a></li>
+            <li><a href="#disclosures">Disclosures authorised by law</a></li>
+            <li><a href="#advisers">Advisers, contractors</a></li>
+            <li><a href="#dispose">How we dispose</a></li>
+            <li><a href="#overseas">Overseas recipients</a></li>
+            <li><a href="#access">Access and correction</a></li>
+            <li><a href="#breach">Suspected breach</a></li>
+            <li><a href="#appendix1">Appendix 1</a></li>
+            <li><a href="#appendix2">Appendix 2</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main privacy content -->
+        <div class="privacy-sections">
+          <section id="about" class="privacy-section">
+            <h2>About our privacy policy</h2>
+            <p>Our privacy policy seeks to:</p>
+            <ul>
+              <li>communicate our personal information handling practices</li>
+              <li>enhance the transparency of our operations</li>
+              <li>give individuals a better and more complete understanding of the personal information we hold and the way in which we deal with that information.</li>
+            </ul>
+            <p>We review our privacy policy regularly and publish it on our website. If you would like to access a copy of our privacy policy in another form, or have feedback on our privacy policy, you can <a href="#">contact us</a>.</p>
+          </section>
+
+          <section id="privacy-act" class="privacy-section">
+            <h2>The Privacy Act</h2>
+            <p>The Privacy Act 1988 (Privacy Act) protects personal information and requires that we comply with the Australian Privacy Principles (APPs) in our handling of personal information.</p>
+            <p>Under the Privacy Act, ‘personal information’ means 'information or an opinion about an identified individual, or an individual who is reasonably identifiable, whether the information is true or not and whether the information is recorded in a material form or not'.</p>
+            <p>We also comply with the requirements of the Privacy (Australian Government Agencies – Governance) APP Code 2017 (APP code). Under the APP code, we have a Privacy Champion and a Privacy Officer, and undertake privacy impact assessments (PIAs).</p>
+          </section>
+
+          <section id="undertaking" class="privacy-section">
+            <h2>Our undertaking to you</h2>
+            <p>We undertake to collect personal information about you in a fair and lawful way and in a manner that is not unreasonably intrusive. We will be transparent and open about what personal information we collect, hold, use and disclose, as well as how you can make a privacy complaint.</p>
+          </section>
+
+          <section id="why" class="privacy-section">
+            <h2>Why we collect, hold, use and disclose personal information</h2>
+            <p>In administering the tax and superannuation laws, we collect, hold, use and disclose a wide range of personal information. We have detailed privacy notices for every tax and super collection. We also collect, hold, use and disclose personal information in relation to our other functions, including as custodian of the Australian Business Register, for data matching, for prosecution and law enforcement, to verify your identity, as lead agency for Digital ID, in procuring goods and services, and as an employer.</p>
+          </section>
+
+          <section id="what" class="privacy-section">
+            <h2>Personal information we collect, hold, use and disclose</h2>
+            <p>We collect, hold, use and disclose personal information about individuals that is necessary for or related to the administration of tax and super laws and other programs we administer.</p>
+
+            <div class="accordion">
+              <div class="accordion-item">
+                <button class="accordion-title">Taxpayer records <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>Personal information includes names, addresses, emails, phone numbers, dates of birth, occupations, TFNs, ABNs, director IDs, bank account details, income, shareholdings, student numbers, trustee details, health fund details, AUSTRAC reports, business ownership, property sales data, and more.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Superannuation records <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>We collect, hold, use and disclose personal information about super guarantee obligations, self-managed super funds, lost members, super co-contributions, and unclaimed super money.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Tax file numbers <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>TFNs are unique identifiers issued by us. They are protected by sections 8WA and 8WB of the Taxation Administration Act 1953 and the Privacy (Tax File Number) Rule 2015. We handle TFN information in accordance with those laws.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Digital ID <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>We participate in Digital ID and deliver myID and RAM. Personal information collected includes name, date of birth, address, email, identity document details. For more, see myID and RAM privacy policies.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Biometric voiceprints <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>We maintain a voiceprint biometric database including call recordings, personal information, and metadata. Voiceprints are created with your consent or in some cases to deal with unauthorised access. You can request deletion.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Tax practitioner records <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>We keep records of registered tax agents including name, business name, contact details, registration number, ABN, email, bank details, and client lodgment history.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Employee records <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>We collect personal information in personnel records for the purpose of discharging the Commissioner's employer powers under the Public Service Act 1999.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Forms on our website <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>Forms support your interactions with us. Mandatory fields are clearly indicated. Any additional information you provide is at your discretion.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">Web browsing records & cookies <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>When you visit ato.gov.au we collect your server address, operating system, pages visited, and browser type. No attempt is made to identify you. Cookies are used to improve your experience. You can disable cookies, but this may affect functionality.</p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-title">ATO app Google API service <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content">
+                  <p>The ATO app includes myDeductions. Android users can back up to Google Drive. We do not access, collect, use, store or share personal information you input into myDeductions or your Google Drive.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="how-collect" class="privacy-section">
+            <h2>How we collect personal information</h2>
+            <p>We collect personal information directly from you, from other persons acting on your behalf, and from third parties including other government agencies, employers, and publicly available sources. We may also use formal information-gathering powers.</p>
+            <h3>When we ask a third party for information about you</h3>
+            <p>Tax and super laws allow us to obtain information from other parties. We normally tell you before seeking it, but there are circumstances where it may not be practicable, such as during audits or when collecting information from financial institutions, government agencies, or share registries.</p>
+          </section>
+
+          <section id="how-hold" class="privacy-section">
+            <h2>How we hold personal information</h2>
+            <p>We take steps to ensure your information is accurate, up‑to‑date and complete. We protect it against misuse, interference, loss, and unauthorised access using industry‑best security methods, including IT security audits, penetration testing, and risk management.</p>
+            <h3>When you contact us</h3>
+            <p>We must verify your identity before discussing your affairs. You can prove your identity by providing your date of birth, address, or details from an ATO‑generated notice. For general enquiries, you can deal with us without identifying yourself.</p>
+            <h3>When we contact you</h3>
+            <p>You have the right to be told why we are asking for your information and what legal authority we rely on.</p>
+          </section>
+
+          <section id="matching" class="privacy-section">
+            <h2>Data matching and data exchange</h2>
+            <p>We do checks to test compliance, including audit and verification programs and data matching. Data matching helps us identify non‑compliance and detect fraud. We acquire data from banks, financial institutions, employers, and welfare agencies, and match it with our own information. Detailed rules and voluntary guidelines protect your privacy.</p>
+          </section>
+
+          <section id="disclosures" class="privacy-section">
+            <h2>Disclosures authorised by law</h2>
+            <p>The law prohibits tax officers from disclosing taxpayer information except in specified circumstances, such as in the course of performing duties, to Commonwealth, state and territory entities for government purposes, to Ministers, and for law enforcement. See <a href="#">Procedures for disclosing protected information</a>.</p>
+          </section>
+
+          <section id="advisers" class="privacy-section">
+            <h2>Disclosing to advisers, contractors and outsourcing</h2>
+            <p>We may engage external advisers and contractors (e.g., call centres, form processors). They are bound by privacy and taxpayer confidentiality provisions, and contracts ensure your information is protected.</p>
+          </section>
+
+          <section id="dispose" class="privacy-section">
+            <h2>How we dispose of personal information</h2>
+            <p>Personal information is treated as a Commonwealth record and retained in accordance with the Archives Act 1983 and records authorities issued by the National Archives. Disposal follows legal requirements.</p>
+          </section>
+
+          <section id="overseas" class="privacy-section">
+            <h2>Disclosing personal information to overseas recipients</h2>
+            <p>We provide personal information to overseas recipients in accordance with international tax treaties and tax information exchange agreements (TIEAs) to combat tax evasion and ensure compliance. See Appendix 2 for a list of countries and jurisdictions.</p>
+          </section>
+
+          <section id="access" class="privacy-section">
+            <h2>How you can access your personal information and seek its correction</h2>
+            <p>You can update your own personal information via our online services. You can access copies of your tax records via myGov. Your authorised representative can also access information via Online services for agents.</p>
+            <p>For documents not available online, you can request access under APP 12 or the Freedom of Information Act 1982. We will respond within 30 days. We do not charge for access requests.</p>
+            <p>You can also request correction of your personal information under APP 13. We will respond within 30 days.</p>
+          </section>
+
+          <section id="breach" class="privacy-section">
+            <h2>What to do about a suspected breach of privacy</h2>
+            <p>If you think your privacy has been breached, you can contact our Privacy Hotline on 1300 661 542 or lodge a formal complaint. We aim to contact you within 3 working days.</p>
+          </section>
+
+          <section id="appendix1" class="privacy-section">
+            <h2>Appendix 1 – What information we collect, hold, use and disclose, and why</h2>
+            <p>Includes Australian Business Register records, director IDs, prosecution and law enforcement records, prescribed taskforces, excise records, databases and data matching records, call recordings, vendor records, and employee records.</p>
+          </section>
+
+          <section id="appendix2" class="privacy-section">
+            <h2>Appendix 2 – Countries and other jurisdictions we disclose personal information to</h2>
+            <p>Countries that have a tax treaty with Australia include Argentina, Austria, Belgium, Canada, Chile, China, Czech Republic, Denmark, Fiji, Finland, France, Germany, Hungary, Iceland, India, Indonesia, Ireland, Israel, Italy, Japan, Kiribati, Republic of Korea, Malaysia, Malta, Mexico, The Netherlands, New Zealand, Norway, Papua New Guinea, Philippines, Poland, Romania, Russia, Singapore, Slovakia, South Africa, Spain, Sri Lanka, Sweden, Switzerland, Taiwan, Thailand, Turkey, United Kingdom, United States of America, Vietnam.</p>
+            <p>Countries with a tax information exchange agreement include Andorra, Anguilla, Antigua and Barbuda, Aruba, The Bahamas, Bahrain, Belize, Bermuda, British Virgin Islands, Brunei, The Cayman Islands, Cook Islands, Costa Rica, Dominica, Gibraltar, Grenada, Guatemala, Guernsey, Isle of Man, Jersey, Liberia, Liechtenstein, Macao, Marshall Islands, Mauritius, Monaco, Montserrat, Netherlands Antilles, Samoa, San Marino, St Kitts and Nevis, St Lucia, St Vincent and the Grenadines, Turks and Caicos Islands, Uruguay, Vanuatu.</p>
+          </section>
+
+          <div class="footer-note">
+            <span>QC39396</span>
+            <a href="#">Print or Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- REPORT BUBBLE -->
+  <div class="report-bubble"><i class="fas fa-exclamation-triangle"></i> Report webpage issue</div>
+
+  <script>
+    (function() {
+      // ----- LOGIN DROPDOWN TOGGLE -----
+      const loginBtn = document.getElementById('loginButton');
+      const loginPanel = document.getElementById('loginPanel');
+      const cancelLogin = document.getElementById('cancelLogin');
+
+      function toggleLogin(show) {
+        loginPanel.classList.toggle('active', show);
+        loginBtn.classList.toggle('active', show);
+      }
+
+      loginBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleLogin(!loginPanel.classList.contains('active'));
+      });
+
+      cancelLogin.addEventListener('click', () => toggleLogin(false));
+
+      document.addEventListener('click', (e) => {
+        if (!loginBtn.contains(e.target) && !loginPanel.contains(e.target)) {
+          toggleLogin(false);
+        }
+      });
+
+      // ----- SIDEBAR TOGGLE (menu button) -----
+      const menuBtn = document.getElementById('menuButton');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+
+      function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebarFunc() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      menuBtn.addEventListener('click', openSidebar);
+      closeSidebar.addEventListener('click', closeSidebarFunc);
+      sidebarCloseBtn.addEventListener('click', closeSidebarFunc);
+      overlay.addEventListener('click', closeSidebarFunc);
+
+      // ----- GLOBAL SEARCH TOGGLE (search button) -----
+      const searchBtn = document.getElementById('searchButton');
+      const globalSearch = document.getElementById('globalSearchSection');
+
+      searchBtn.addEventListener('click', () => {
+        globalSearch.classList.toggle('active');
+      });
+
+      // ----- HOME BUTTON (placeholder) -----
+      document.getElementById('homeButton').addEventListener('click', () => {
+        window.location.href = '#'; // replace with actual home page
+      });
+
+      // ----- FOOTER DROPDOWNS -----
+      const footerHeaders = document.querySelectorAll('.footer-column h4');
+      footerHeaders.forEach(header => {
+        const icon = header.querySelector('i');
+        const ul = header.nextElementSibling;
+        ul.classList.remove('collapsed');
+        icon.classList.remove('rotate');
+
+        header.addEventListener('click', () => {
+          ul.classList.toggle('collapsed');
+          icon.classList.toggle('rotate');
+        });
+      });
+
+      // ----- ACCORDION (privacy sections) -----
+      document.querySelectorAll('.accordion-title').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const content = btn.nextElementSibling;
+          btn.classList.toggle('open');
+          content.classList.toggle('open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

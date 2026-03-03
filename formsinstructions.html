@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>...</head>
+<body>
+  <div class="content-wrapper">
+    <div class="page-header"><h1>Forms and instructions</h1><p>Download forms and find guidance</p></div>
+    <div class="main-content">
+      <div class="alphabet-index">
+        <a href="#">A</a><a href="#">B</a>...<a href="#">Z</a>
+      </div>
+      <div class="form-list">
+        <div class="form-item">
+          <h3>Tax file number declaration <span class="badge">PDF</span></h3>
+          <button class="download-btn">Download</button>
+          <button class="info-btn">Instructions</button>
+          <div class="instruction-content" style="display:none;">How to fill this form...</div>
+        </div>
+        <!-- more items -->
+      </div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.info-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.target.nextElementSibling.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

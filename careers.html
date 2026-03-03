@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Australian Taxation Office | Professional Live</title>
-  <!-- Abril Fatface font -->
+  <title>Careers | Australian Taxation Office</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ----- DESIGN SYSTEM ----- */
+    /* ----- DESIGN SYSTEM (homepage) ----- */
     * {
       margin: 0;
       padding: 0;
@@ -38,12 +41,15 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--gray-50);
+      background: var(--navy);
       color: var(--gray-800);
       line-height: 1.5;
+      overflow-x: hidden;
     }
 
-    /* ----- HEADER (exact structure preserved) ----- */
+   
+
+    /* ----- HEADER (homepage) ----- */
     header {
       background: var(--navy);
       color: white;
@@ -67,51 +73,22 @@
       filter: brightness(1.05);
     }
 
-.ato-logo {
-  height: 80px;
-  filter: brightness(1.05);
-}
     .header-text h4 {
       font-size: 0.7rem;
       font-weight: 500;
       opacity: 0.9;
       font-family: 'Abril Fatface', cursive;
-      justify-items: left;
     }
 
     .header-text hr {
       width: 130px;
       border: none;
       height: 1px;
-      background: var(--white);
-      margin: 4px 5;
-      
-    }
-    
-    .help-btn {
-      background: #FFFEFE;
-      border: 1px solid rgba(255, 255, 255, 1);
-      color: #2D48C6;
-      font-weight: 100;
-      padding: 0.4rem 1rem;
-      border-radius: 12px;
-      align-items: center;
-      gap: 0.6rem;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.8rem;
+      background: white;
+      margin: 4px 0;
     }
 
-    .help-btn:hover {
-      background: rgba(0, 0, 0, 0.99);
-      border-color: var(--blue);
-    }
-
-    .help-btn i {
-      transition: transform 0.4s;
-    }
-
-    /* ----- LOGIN BUTTON & DROPDOWN (fully functional) ----- */
+       /* ----- LOGIN BUTTON & DROPDOWN (fully functional) ----- */
     .login-container {
       position: relative;
     }
@@ -241,60 +218,84 @@
       border-color: var(--navy);
       color: white;
     }
-
-    /* ----- NAVIGATION BAR ----- */
+   /* ----- NAV BAR (two vertical lines – after menu and after home) ----- */
     .nav-bar {
       background: white;
       padding: 0.6rem 5%;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid #e2e8f0;
       position: relative;
       z-index: 90;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
     }
 
     .nav-btn {
       background: none;
       border: none;
       color: var(--black);
-      font-weight: 950;
+      font-weight: 800;
       padding: 0.6rem 1rem;
-      border-radius: 2px;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.5rem;
       cursor: pointer;
       transition: 0.2s;
       position: relative;
     }
 
-    /* vertical line between buttons */
-    .nav-btn:first-child::before {
-      content: '';
-      position: absolute;
-      right: -0.4rem;
-      top: 0%;
-      height: 110%;
-      width: 1px;
-      background: #cbd5e1;
+    .nav-btn i {
+      font-size: 1rem;
     }
-/* vertical line between buttons */
-.nav-btn:first-child::after {
-  content: '';
-  position: absolute;
-  left: 60vw; 89%;
-  top: 0%;
-  height: 110%;
-  width: 1px;
-  background: #cbd5e1;
-}
 
     .nav-btn:hover {
       background: var(--cream);
-      color: var(--red);
+      color: var(--navy);
     }
 
-    /* ----- SIDEBAR (half-screen, functional) ----- */
+    /* first vertical line after menu button */
+    .nav-btn:first-child::after {
+      content: '';
+      position: absolute;
+      right: -0.4rem;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: #cbd5e1;
+    }
+
+    .home-btn {
+      background: none;
+      border: none;
+      color: var(--black);
+      font-size: 1.1rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+    .home-btn:hover {
+      background: var(--cream);
+      color: var(--navy);
+    }
+    /* second vertical line after home button */
+    .home-btn::after {
+      content: '';
+      position: absolute;
+      right: -0.4rem;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: #cbd5e1;
+    }
+    
+   /* ----- SIDEBAR (half-screen, functional) ----- */
     .sidebar-overlay {
       position: fixed;
       inset: 0;
@@ -393,24 +394,21 @@
       text-align: center;
     }
 
-    /* ----- SEARCH BAR ----- */
-    .search-section {
+    /* ----- SEARCH BAR (global toggle) ----- */
+    .global-search-section {
       background: white;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease;
       border-bottom: 1px solid #e2e8f0;
     }
-
-    .search-section.active {
+    .global-search-section.active {
       max-height: 120px;
     }
-
-    .search-container {
+    .global-search-container {
       padding: 1.2rem 5%;
     }
-
-    .search-box {
+    .global-search-box {
       background: var(--gray-100);
       border-radius: 60px;
       padding: 0.8rem 1.5rem;
@@ -419,12 +417,10 @@
       gap: 1rem;
       border: 1px solid #dce3ec;
     }
-
-    .search-box i {
+    .global-search-box i {
       color: var(--navy);
     }
-
-    .search-box input {
+    .global-search-box input {
       border: none;
       background: transparent;
       width: 100%;
@@ -432,237 +428,181 @@
       outline: none;
     }
 
-    /* ===== HERO SECTION – SHORTER RECTANGULAR CARDS, EACH WITH DISTINCT COLOR ===== */
-    .hero-section {
-      background: linear-gradient(rgba(0, 51, 68, 0.25), rgba(0, 51, 68, 0.2)),
-                  url('https://i.ibb.co/BKqpBdP8/IMG-20260301-WA0002.jpg') center 30% / cover;
-      min-height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
-      position: relative;
+    /* ===== CAREERS CONTENT ===== */
+    .content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
     }
 
-    .card-container {
+    .page-header {
+      background: var(--navy);
+      color: white;
+      padding: 3rem 5% 2rem;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .main-content {
+      background: var(--gray-50);
+      padding: 2rem 5% 4rem;
+    }
+
+    /* hero cards grid */
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width:1200px;
-      width: 100%;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
     }
 
     .hero-card {
+      background: white;
       border-radius: 5px;
-      padding: 1rem 1rem;
+      padding: 1.2rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: 0.3s;
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      background: white;
       border-bottom: 5px solid transparent;
+      cursor: pointer;
     }
-
-    /* distinct bottom border colors */
-    .hero-card:nth-child(1) {
-      border-bottom-color: #560E98;
-    }
-    .hero-card:nth-child(2) {
-      border-bottom-color: #87211B;
-    }
-    .hero-card:nth-child(3) {
-      border-bottom-color: #1B8781;
-    }
+    .hero-card:nth-child(6n+1) { border-bottom-color: #560E98; }
+    .hero-card:nth-child(6n+2) { border-bottom-color: #87211B; }
+    .hero-card:nth-child(6n+3) { border-bottom-color: #1B8781; }
+    .hero-card:nth-child(6n+4) { border-bottom-color: #B8860B; }
+    .hero-card:nth-child(6n+5) { border-bottom-color: #3844CA; }
+    .hero-card:nth-child(6n+6) { border-bottom-color: #c93c20; }
 
     .hero-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       box-shadow: 0 12px 20px rgba(20, 64, 120, 1);
     }
-
-    .hero-card i {
-      font-size: 1.2rem;
-      color: inherit;
-      margin-bottom: 5px;
-    }
-
-    /* icon and link colors match border */
-    .hero-card:nth-child(1) i,
-    .hero-card:nth-child(1) a {
-      color: #560E98;
-    }
-    .hero-card:nth-child(2) i,
-    .hero-card:nth-child(2) a {
-      color: #87211B;
-    }
-    .hero-card:nth-child(3) i,
-    .hero-card:nth-child(3) a {
-      color: #1B8781;
-    }
-
     .hero-card h3 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: #000;
       margin-bottom: 8px;
       font-weight: 700;
     }
-
     .hero-card p {
       color: #333;
       font-size: 0.95rem;
       line-height: 1.5;
-      margin-bottom: 10px;
-      flex: 1;
-      font-weight: 410;
     }
 
-    .hero-card a {
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-      align-self: flex-start;
-      transition: 0.2s;
-    }
-
-    .hero-card a:hover {
-      gap: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .card-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* ===== POPULAR TOPICS ===== */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 3rem 5%;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-header h2 {
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 700;
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .section-header h2::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 6px;
-      background: linear-gradient(to bottom, var(navy), var(--navy));
-      border-radius: 3px;
-    }
-
-    .section-link {
-      color: var(--navy);
-      font-weight: 600;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.3rem 1.8rem;
-      border-radius: 60px;
-      background: var(--cream);
-      transition: 0.2s;
-    }
-
-    .section-link:hover {
-      background: var(--navy-light);
-      color: white;
-    }
-
-    .popular-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
-    }
-
-    .topic-card {
-      background: #f5f5f5; /* light grey */
-      border-radius: 5px;
+    /* feature card (search jobs) */
+    .feature-card {
+      background: white;
+      border-radius: 16px;
       padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      transition: var(--transition);
-      border-bottom: 7.5px solid #ddd;
+      margin: 1rem 0;
+      box-shadow: var(--shadow-lg);
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4rem;
+      border: 1px solid var(--gray-200);
     }
-
-    .topic-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      border-color: var(--navy);
-    }
-
-    .topic-icon {
-      width: 44px;
-      height: 44px;
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--cream);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .topic-icon i {
-      font-size: 1.2rem;
-      color: #9A9A9A;
-    }
-
-    .topic-card h4 {
-      color: #000;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .topic-card p {
-      color: #4a4a4a;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .topic-tag {
+      font-size: 2.5rem;
       color: var(--navy);
-      font-size: 0.85rem;
+    }
+    .feature-text {
+      flex: 1;
+      min-width: 250px;
+    }
+    .feature-text h3 {
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+    .feature-text p {
+      color: var(--gray-600);
+      margin-bottom: 0.4rem;
+    }
+    .feature-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .feature-btn {
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
       font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: auto;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .feature-btn:hover {
+      background: var(--navy-light);
+    }
+    .feature-btn.outline {
+      background: transparent;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+    }
+    .feature-btn.outline:hover {
+      background: var(--navy);
+      color: white;
+    }
+      
     }
 
-    .topic-tag:hover {
-      gap: 0.8rem;
-      color: #000;
+    /* image cards grid */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
     }
+    .image-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: 0.3s;
+    }
+    .image-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .image-placeholder {
+      height: 160px;
+      background: linear-gradient(145deg, var(--navy), var(--navy-light));
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      color: white;
+      font-weight: 600;
+    }
+    .image-card h4 {
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin: 1rem;
+    }
+
 
     /* ===== FEATURE CARDS – WITH IMAGES ===== */
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
     }
 
-    .feature-card {
+    .feature-grid2 {
       background: white;
       border-radius: 5px;
       overflow: hidden;
@@ -670,34 +610,34 @@
       transition: var(--transition);
     }
 
-    .feature-card:hover {
+    .feature-card2:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-lg);
       border-bottom: 7.5px solid var(--navy);
     }
 
     .feature-image {
-      height: 200px;
+      height: 140px;
       width: 100%;
       object-fit: cover;
       display: block;
     }
 
     .feature-content {
-      padding: 1.5rem;
+      padding: 2rem;
     }
 
     .feature-content h4 {
       color: var(--navy);
       font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .feature-content p {
       color: var(--gray-600);
       font-size: 0.9rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
       line-height: 1.5;
     }
 
@@ -716,87 +656,22 @@
       gap: 0.8rem;
       color: var(--navy);
     }
-
-    /* ===== HELP SECTION (fixed with consistent buttons) ===== */
-    .help-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    .help-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .help-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .help-card i {
-      font-size: 3rem;
-      color: var(--navy);
-      margin-bottom: 1rem;
-    }
-
-    .help-card h3 {
-      font-size: 1.3rem;
-      color: var(--navy);
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-    }
-
-    .help-card p {
-      color: #4a5568;
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .help-card a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--navy-light);
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 1.5rem;
-      border: 2px solid var(--navy-light);
-      border-radius: 60px;
-      transition: 0.2s;
-    }
-
-    .help-card a:hover {
-      background: var(--gold);
-      color: white;
-    }
-
-    /* ===== AUTHENTIC FOOTER – COLUMN LINKS, SOCIAL, ACKNOWLEDGMENT ===== */
+    /* ----- FOOTER (homepage dark purple) ----- */
     .footer {
       background: #160925;
       color: white;
       padding: 3rem 5% 2rem;
     }
-
     .footer-container {
       max-width: 1400px;
       margin: 0 auto;
     }
-
     .footer-columns {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       margin-bottom: 3rem;
     }
-
     .footer-column h4 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -806,61 +681,37 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      transition: color 0.2s;
     }
-
-    .footer-column h4 i {
-      font-size: 1.2rem;
-      transition: transform 0.3s ease;
-    }
-
-    .footer-column h4 i.rotate {
-      transform: rotate(180deg);
-    }
-
     .footer-column ul {
       list-style: none;
       max-height: 300px;
       overflow: hidden;
       transition: max-height 0.4s ease;
     }
-
     .footer-column ul.collapsed {
       max-height: 0;
     }
-
     .footer-column li {
       margin-bottom: 0.7rem;
     }
-
     .footer-column a {
       color: #b7c9dd;
       text-decoration: none;
-      transition: 0.2s;
       font-size: 0.9rem;
     }
-
     .footer-column a:hover {
       color: var(--gold);
     }
-
     .footer-social {
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-bottom: 2rem;
     }
-
     .footer-social a {
       color: white;
       font-size: 1.5rem;
-      transition: 0.2s;
     }
-
-    .footer-social a:hover {
-      color: var(--gold);
-    }
-
     .footer-acknowledgement {
       max-width: 800px;
       margin: 0 auto 2rem;
@@ -872,12 +723,14 @@
       color: #b7c9dd;
       font-size: 0.9rem;
     }
-
     .footer-acknowledgement i {
       font-size: 2.5rem;
       color: var(--gold);
     }
-
+  .ato-logo {
+  height: 80px;
+  filter: brightness(1.05);
+}
     .footer-copyright {
       text-align: center;
       border-top: 1px solid #3a5a7a;
@@ -885,18 +738,12 @@
       font-size: 0.85rem;
       color: #b7c9dd;
     }
-
     .footer-copyright a {
       color: #b7c9dd;
       text-decoration: none;
     }
 
-    .footer-copyright a:hover {
-      color: var(--gold);
-    }
-
-    /* ----- FIXED CHAT & REPORT (modern professional) ----- */
-    
+    /* fixed report */
     .report-bubble {
   position: fixed;
   bottom: 0px;
@@ -913,44 +760,72 @@
   z-index: 400;
   font-size: 0.9rem;
   cursor: pointer;
-    }
+}
 
-    .report-bubble:hover {
-      transform: translateY(-2px);
+.report-bubble:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient var(black);
+}
+
+.report-bubble i {
+  font-size: 0.8rem;
+}
+
+    /* Modal for hero cards */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 24px;
+      padding: 2rem;
       box-shadow: var(--shadow-xl);
-      background: linear-gradient var(black);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--red);
+      cursor: pointer;
+    }
+    .modal-content h2 {
+      color: var(--navy);
+      margin-bottom: 1rem;
     }
 
-    .report-bubble i {
-      font-size: 0.8rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
+    /* responsive */
     @media (max-width: 1100px) {
-      .popular-grid, .feature-grid, .footer-columns, .help-section {
+      .footer-columns {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-
     @media (max-width: 768px) {
-      .popular-grid, .feature-grid, .footer-columns, .help-section {
+      .footer-columns {
         grid-template-columns: 1fr;
       }
-
-      .sidebar {
-        width: 100%;
-        left: -100%;
-      }
-
-      .header-text hr {
-        width: 100px;
+      .nav-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER (buttons fully functional) -->
+
+  <!-- HEADER -->
   <header>
     <div class="header-left">
       <img src="https://i.ibb.co/jPd83cjL/02052025-Medicare.png" alt="ATO" class="logo-img">
@@ -965,18 +840,17 @@
       <button class="login-btn" id="loginButton" aria-expanded="false">
         Log in <i class="fas fa-chevron-down"></i>
       </button>
-
       <div class="login-panel" id="loginPanel">
         <div class="login-header">
           <h3>Welcome back</h3>
-          <p>Access your ATO online services</p>
+          <p style="color:#5f6b7a; font-size:0.9rem;">Access your ATO online services</p>
         </div>
         <div class="login-options">
-          <a href="loginmygov.html" class="login-option"><i class="fas fa-user"></i><span>Individuals</span> <i class="fas fa-external-link-alt"></i> <small>myGov</small></a>
-          <a href="loginmygov.html" class="login-option"><i class="fas fa-building"></i><span>Business</span><i class="fas fa-external-link-alt"></i><small>BAS, PAYG.</small></a>
-          <a href="loginmygov.html" class="login-option"><i class="fas fa-user-tie"></i><span>Agents</span><i class="fas fa-external-link-alt"></i><small>Agent portal</small></a>
-          <a href="loginmygov.html" class="login-option"><i class="fas fa-piggy-bank"></i><span>Super funds</span><i class="fas fa-external-link-alt"></i><small>ATO online</small></a>
-          <a href="loginmygov.html" class="login-option"><i class="fas fa-globe"></i><span>Non-residents</span><i class="fas fa-external-link-alt"></i><small>AusID</small></a>
+          <a href="#" class="login-option"><i class="fas fa-user"></i><span>Individuals </span> <i class="fas fa-external-link-alt"></i><small>myGov</small></a>
+          <a href="#" class="login-option"><i class="fas fa-building"></i><span>Business </span><i class="fas fa-external-link-alt"></i><small>BAS, PAYG.</small></a>
+          <a href="#" class="login-option"><i class="fas fa-user-tie"></i><span>Agents</span><i class="fas fa-external-link-alt"></i><small>Agent portal</small></a>
+          <a href="#" class="login-option"><i class="fas fa-piggy-bank"></i><span>Super funds</span><i class="fas fa-external-link-alt"></i><small>ATO online</small></a>
+          <a href="#" class="login-option"><i class="fas fa-globe"></i><span>Non-residents</span><i class="fas fa-external-link-alt"></i><small>AusID</small></a>
         </div>
         <div class="login-footer">
           <button class="cancel-btn" id="cancelLogin"><i class="fas fa-times"></i> Cancel</button>
@@ -985,11 +859,20 @@
     </div>
   </header>
 
+  <!-- NAV BAR (two vertical lines) -->
   <div class="nav-bar">
-    <button class="nav-btn" id="menuButton"><i class="fas fa-bars"></i> Menu</button>
-    <button class="nav-btn" id="searchButton"><i class="fas fa-search"></i> Search</button>
+    <div class="nav-left">
+      <button class="nav-btn" id="menuButton"><i class="fas fa-bars"></i> Menu</button>
+    </div>
+    <div class="nav-center">
+      <button class="home-btn" id="homeButton"><i class="fas fa-home"></i></button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn" id="searchButton"><i class="fas fa-search"></i> Search</button>
+    </div>
   </div>
 
+  <!-- SIDEBAR -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -997,118 +880,109 @@
       <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
     </div>
     <div class="sidebar-nav">
-      <a href="#"><i class="fas fa-home"></i> Home</a>
+      <a href="index.html"><i class="fas fa-home"></i> Home <i class="fas fa-circle-chevron-right"></i></a>
       <a href="path.html"><i class="fas fa-users"></i> Individuals and families<i class="fas fa-circle-chevron-right"></i></a>
       <a href="business.html"><i class="fas fa-building"></i> Businesses and organisations<i class="fas fa-circle-chevron-right"></i></a>
-      <a href="tax-professionals.html"><i class="fas fa-user-tie"></i> Tax and super professionals<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-user-tie"></i> Tax and super professionals<i class="fas fa-circle-chevron-right"></i></a>
       <a href="community.html"><i class="fas fa-comments"></i> ATO Community<i class="fas fa-circle-chevron-right"></i></a>
-      <a href="path.html"><i class="fas fa-gavel"></i> Legal database<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-gavel"></i> Legal database<i class="fas fa-circle-chevron-right"></i></a>
       <a href="newsarticle.html"><i class="fas fa-newspaper"></i> What's New<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-briefcase"></i> Careers</a>
     </div>
     <div class="sidebar-footer">
       <button class="cancel-btn" id="sidebarCloseBtn"><i class="fas fa-times"></i> Close menu</button>
     </div>
   </div>
 
-  <div class="search-section" id="searchSection">
-    <div class="search-container">
-      <div class="search-box">
+  <!-- GLOBAL SEARCH (toggles) -->
+  <div class="global-search-section" id="globalSearchSection">
+    <div class="global-search-container">
+      <div class="global-search-box">
         <i class="fas fa-search"></i>
         <input type="text" placeholder="Search ato.gov.au — tax return, myGov, super...">
       </div>
     </div>
   </div>
 
-  <!-- HERO – shorter rectangular cards, distinct colors, left-aligned -->
-  <section class="hero-section">
-    <div class="card-container">
-      <div class="hero-card">
-        <h3>Individuals & Families</h3>
-        <p>Manage tax returns, super, payments and myGov linkage securely.</p>
-        <a href="path.html">Explore now <i class="fas fa-circle-chevron-right"></i></a>
-      </div>
-      <div class="hero-card">
-        <h3>Business & Organisations</h3>
-        <p>Handle BAS, FBT, payroll super and employer obligations.</p>
-        <a href="business.html">Business tools <i class="fas fa-circle-chevron-right"></i></a>
-      </div>
-      <div class="hero-card">
-        <h3>Tax & Super Professionals</h3>
-        <p>Agent portals, compliance guidance and client resources.</p>
-        <a href="tax-professionals.html">Professional hub <i class="fas fa-circle-chevron-right"></i></a>
-      </div>
+  <!-- MAIN CONTENT -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h1>Careers</h1>
+      <p>At the ATO we offer you a place where you can belong, a say in how you make a difference, and the chance to grow a successful career.</p>
     </div>
-  </section>
 
-  <!-- POPULAR TOPICS -->
-  <div class="container">
-    <div class="section-header">
-      <h2>Popular topics</h2>
-    </div>
-    <div class="popular-grid">
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-id-card"></i></div><h4>Tax file number</h4><p>Apply, update or replace your TFN. Keep your details safe.</p><a href="path.html?topic=tax-file-number" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-user-check"></i></div><h4>myGov account</h4><p>Create and link your myGov account to ATO online services.</p><a href="loginmygov.html" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-clock"></i></div><h4>Payday Super</h4><p>Employer obligations: pay super on time, every time.</p><a href="path.html?topic=Super-for-individuals-and-families" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-credit-card"></i></div><h4>Paying the ATO</h4><p>Easy payment options and what happens if you don't pay.</p><a href="path.html?topic=paying-the-ato" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-file-invoice"></i></div><h4>Your tax return</h4><p>Lodge online, track progress, or get help from a tax agent.</p><a href="path.html?topic=your-tax-return" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-      <div class="topic-card"><div class="topic-icon"><i class="fas fa-hand-holding-heart"></i></div><h4>Support in difficult times</h4><p>Help when you're affected by natural disaster or crisis.</p><a href="path.html?topic=support-in-difficult-times" class="topic-tag">Learn more <i class="fas fa-circle-chevron-right"></i></a></div>
-    </div>
-  </div>
-
-  <!-- FEATURE CARDS – with authentic images -->
-  <div class="container">
-    <div class="section-header">
-      <h2>What's new</h2>
-      <a href="#" class="section-link">All updates <i class="fas fa-circle-chevron-right"></i></a>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <img class="feature-image" src="https://i.ibb.co/3m050zLc/Image1.png" alt="ATO app on mobile">
-        <div class="feature-content"><a href="#"><h4>It’s your tax and super in your pocket</h4></a>
-        <p>Download the ATO app to manage your tax and super on the go.</p><a href="tax-professionals.html" class="feature-link">Download <i class="fas fa-circle-chevron-right"></i></a></div>
+    <div class="main-content" id="main">
+      <!-- Hero cards (career topics) -->
+      <div class="hero-grid">
+        <div class="hero-card" data-topic="find">
+          <h3>Find a job</h3>
+          <p>Find out about current vacancies and future jobs when they're advertised.</p>
+        </div>
+        <div class="hero-card" data-topic="why">
+          <h3>Why join us</h3>
+          <p>Understand our work, culture, learning opportunities and conditions, to help you grow a successful career with us.</p>
+        </div>
+        <div class="hero-card" data-topic="apply">
+          <h3>How to apply</h3>
+          <p>Our recruitment process, tips for applicants, what we look for and technical support.</p>
+        </div>
+        <div class="hero-card" data-topic="graduate">
+          <h3>Graduate and entry level programs</h3>
+          <p>We have a range of pathways to start your career, for university students and graduates, school leavers and more.</p>
+        </div>
+        <div class="hero-card" data-topic="inclusion">
+          <h3>Inclusion and diversity</h3>
+          <p>We're committed to building a diverse and inclusive workplace. See what we're doing to make it happen.</p>
+        </div>
+        <div class="hero-card" data-topic="jobtypes">
+          <h3>Job types</h3>
+          <p>Explore endless career pathways at the ATO. View our job types here.</p>
+        </div>
       </div>
+
+      <!-- Feature card: search for job opportunities -->
       <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="feature-text">
+          <h3>Search for job opportunities</h3>
+          <p>Search for current vacancies and sign up for job alerts on our ATO Careers portal.</p>
+          <div class="feature-buttons">
+            <button class="feature-btn">Search current vacancies</button>
+            <button class="feature-btn outline">Sign up for job alerts</button>
+          </div>
+        </div>
+      </div> <br>
+
+ <div class="feature-card2">
         <img class="feature-image" src="https://i.ibb.co/WpYSDY4W/ato-gov-au-homepage-Standard-card-314-x-182px.png" alt="FBT advertising">
-        <div class="feature-content"><a href="business.html"><h4>The FBT year ends on 31 March...are you ready?</h4></a>
+        <div class="feature-content"><a href="#"><h4>The FBT year ends on 31 March...are you ready?</h4></a>
 <p>Providing perks to your employees may attract fringe benefits tax (FBT). Make sure you know what to do this FBT tax time.</p><a href="#" class="feature-link">FBT essentials <i class="fas fa-circle-chevron-right"></i></a></div>
       </div>
-      <div class="feature-card">
-        <img class="feature-image" src="https://i.ibb.co/WNTncJQH/DE-68085-Standard-Card-314x182.jpg" alt="Scam protection">
-        <div class="feature-content"><a href="community.html"> <h4>Don’t let a scammer piece together your identity</h4></a>
-        <p>How to protect your information from falling into the wrong hands.</p><a href="#" class="feature-link">Stay safe <i class="fas fa-circle-chevron-right"></i></a></div>
+    
+    
+     <div class="feature-card2">
+        <img class="feature-image" src="https://i.ibb.co/WpYSDY4W/ato-gov-au-homepage-Standard-card-314-x-182px.png" alt="FBT advertising">
+        <div class="feature-content"><a href="#"><h4>The FBT year ends on 31 March...are you ready?</h4></a>
+<p>Providing perks to your employees may attract fringe benefits tax (FBT). Make sure you know what to do this FBT tax time.</p><a href="#" class="feature-link">FBT essentials <i class="fas fa-circle-chevron-right"></i></a></div>
       </div>
-      <div class="feature-card">
-        <img class="feature-image" src="https://i.ibb.co/TxgG0j3W/DE-64928-Worker-group-with-super-pigs-314-x-182-Digital-144dpi.jpg" alt="Super piggy banks">
-        <div class="feature-content"> <a href="#"> <h4>Understand your super obligations as an employer</h4></a>
-        <p>Understand how much, when and how to pay super to your employees. Our guidance includes checklists and an online course.</p><a href="#" class="feature-link">Employer hub <i class="fas fa-circle-chevron-right"></i></a></div>
+       <div class="feature-card2">
+        <img class="feature-image" src="https://i.ibb.co/WpYSDY4W/ato-gov-au-homepage-Standard-card-314-x-182px.png" alt="FBT advertising">
+        <div class="feature-content"><a href="#"><h4>The FBT year ends on 31 March...are you ready?</h4></a>
+<p>Providing perks to your employees may attract fringe benefits tax (FBT). Make sure you know what to do this FBT tax time.</p><a href="#" class="feature-link">FBT essentials <i class="fas fa-circle-chevron-right"></i></a></div>
       </div>
-    </div>
+  </div>
   </div>
 
-  <!-- HELP SECTION (fixed with consistent cards and circle-chevron-right) -->
-  <section class="help-section">
-    <div class="help-card">
-      <i class="fas fa-message"></i>
-      <h3>Online services</h3>
-      <p>Use online services to access tax and super records. Find technical support, systems advice and online security tips.</p>
-      <a href="community.html">Online services <i class="fas fa-circle-chevron-right"></i></a>
-    </div>
-    <div class="help-card">
-      <i class="fas fa-circle-info"></i>
-      <h3>Calculators and tools</h3>
-      <p>Find calculators and tools to help you with your tax and super. You can filter results by audience, topic and year.</p>
-      <a href="careers.html">Calculators and tools <i class="fas fa-circle-chevron-right"></i></a>
-    </div>
-  </section>
-
-  <!-- AUTHENTIC FOOTER with columns, social, acknowledgment, and dropdown chevrons -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-columns">
         <div class="footer-column">
           <h4>Tools <i class="fas fa-circle-chevron-down"></i></h4>
           <ul>
-          
+           
             <li><a href="#">Forms and instructions</a></li>
             <li><a href="#">Tax rates and codes</a></li>
             <li><a href="#">Calculators and tools</a></li>
@@ -1117,9 +991,9 @@
         <div class="footer-column">
           <h4>Tax information for <i class="fas fa-circle-chevron-down"></i></h4>
           <ul>
-            <li><a href="path.html?topic=people-with-disability">People with disability</a></li>
-            <li><a href="path.html?topic=Aboriginal-and-Torres-Strait-Islander-peoples">Aboriginal and Torres Strait Islander peoples</a></li>
-            <li><a href="path.html?topic=Norfolk-Island">Norfolk Island</a></li>
+            <li><a href="#">People with disability</a></li>
+            <li><a href="#">Aboriginal and Torres Strait Islander peoples</a></li>
+            <li><a href="#">Norfolk Island</a></li>
             <li><a href="#">Other languages</a></li>
           </ul>
         </div>
@@ -1129,19 +1003,17 @@
             <li><a href="#">Top call centre questions</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Identity security and scams</a></li>
-            <li><a href="path.html?topic=Financial-difficulties,-disasters-and-vulnerability-support">Financial difficulties</a></li>
+            <li><a href="#">Financial difficulties</a></li>
           </ul>
         </div>
-       
-     <div class="footer-column">
-   <ul>
-     <li><a href="about.html">About ATO</a></li>
-     <li><a href="careers.html">Careers</a></li>
-     <li><a href="privacypolicy.html">Privacy policy</a></li>
-     
-     
-   </ul>
- </div>
+        <div class="footer-column">
+  <ul>
+    <li><a href="about.html">About ATO</a></li>
+    <li><a href="privacypolicy.html">Privacy policy</a></li>
+    
+    
+  </ul>
+</div>
       </div>
 
       <div class="footer-social">
@@ -1152,7 +1024,7 @@
       </div>
 
       <div class="footer-acknowledgement">
-       <img src="https://i.ibb.co/Tqr4RB6F/In-Shot-20260302-222639957.png" alt="ATO Indigenous " class="ato-logo"/>
+       <img src="https://i.ibb.co/Tqr4RB6F/In-Shot-20260302-222639957.png" alt="ATO Indigenous Badge" class="ato-logo"/>
         <span>We acknowledge the Traditional Owners and Custodians of Country throughout Australia and their continuing connection to land, waters and community. We pay our respects to them, their cultures, and Elders past and present.</span>
       </div>
 
@@ -1162,19 +1034,28 @@
     </div>
   </footer>
 
-  <!-- FIXED CHAT & REPORT (modern professional) -->
-  <div class="report-bubble"><i class="fas fa-exclamation-triangle"></i> Report issue</div>
+  <!-- REPORT BUBBLE -->
+  <div class="report-bubble"><i class="fas fa-exclamation-triangle"></i> Report webpage issue</div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <span class="modal-close" id="modalClose">&times;</span>
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalBody">Content goes here.</p>
+    </div>
+  </div>
 
   <script>
     (function() {
-      // Login dropdown - fully functional
+      // ----- LOGIN DROPDOWN -----
       const loginBtn = document.getElementById('loginButton');
       const loginPanel = document.getElementById('loginPanel');
       const cancelLogin = document.getElementById('cancelLogin');
 
       function toggleLogin(show) {
         loginPanel.classList.toggle('active', show);
-        loginBtn.setAttribute('aria-expanded', show);
+        loginBtn.classList.toggle('active', show);
       }
 
       loginBtn.addEventListener('click', (e) => {
@@ -1190,7 +1071,7 @@
         }
       });
 
-      // Sidebar - fully functional
+      // ----- SIDEBAR -----
       const menuBtn = document.getElementById('menuButton');
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('sidebarOverlay');
@@ -1214,20 +1095,24 @@
       sidebarCloseBtn.addEventListener('click', closeSidebarFunc);
       overlay.addEventListener('click', closeSidebarFunc);
 
-      // Search bar - fully functional
+      // ----- GLOBAL SEARCH TOGGLE -----
       const searchBtn = document.getElementById('searchButton');
-      const searchSection = document.getElementById('searchSection');
+      const globalSearch = document.getElementById('globalSearchSection');
 
       searchBtn.addEventListener('click', () => {
-        searchSection.classList.toggle('active');
+        globalSearch.classList.toggle('active');
       });
 
-      // Footer dropdown functionality
+      // ----- HOME BUTTON -----
+      document.getElementById('homeButton').addEventListener('click', () => {
+        window.location.href = 'index.html'; // replace with actual home page
+      });
+
+      // ----- FOOTER DROPDOWNS -----
       const footerHeaders = document.querySelectorAll('.footer-column h4');
       footerHeaders.forEach(header => {
         const icon = header.querySelector('i');
         const ul = header.nextElementSibling;
-        // Initially ensure ul is visible (max-height set by CSS)
         ul.classList.remove('collapsed');
         icon.classList.remove('rotate');
 
@@ -1236,8 +1121,51 @@
           icon.classList.toggle('rotate');
         });
       });
+
+      // ----- MODAL FOR CAREER CARDS -----
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalClose = document.getElementById('modalClose');
+
+      const careerData = {
+        find: { title: "Find a job", body: "Find out about current vacancies and future jobs when they're advertised. We offer diverse roles across Australia, from tax and super to IT, HR, and more." },
+        why: { title: "Why join us", body: "Understand our work, culture, learning opportunities and conditions. We support flexible working, professional development, and a positive, inclusive environment." },
+        apply: { title: "How to apply", body: "Our recruitment process, tips for applicants, what we look for and technical support. We’re committed to making the application process accessible and fair." },
+        graduate: { title: "Graduate and entry level programs", body: "We have a range of pathways to start your career, for university students and graduates, school leavers and more. Join our graduate program and kickstart your future." },
+        inclusion: { title: "Inclusion and diversity", body: "We're committed to building a diverse and inclusive workplace. See what we're doing to make it happen – including our Reconciliation Action Plan and Diversity Strategy." },
+        jobtypes: { title: "Job types", body: "Explore endless career pathways at the ATO. From frontline service delivery to data analytics, legal, finance, and corporate services – find your fit." }
+      };
+
+      function showModal(title, content) {
+        modalTitle.textContent = title;
+        modalBody.textContent = content;
+        modalOverlay.style.display = 'flex';
+      }
+
+      modalClose.addEventListener('click', () => {
+        modalOverlay.style.display = 'none';
+      });
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) modalOverlay.style.display = 'none';
+      });
+
+      document.querySelectorAll('.hero-card[data-topic]').forEach(card => {
+        card.addEventListener('click', () => {
+          const key = card.getAttribute('data-topic');
+          if (key && careerData[key]) {
+            showModal(careerData[key].title, careerData[key].body);
+          }
+        });
+      });
+
+      // Image cards and feature card buttons (optional)
+      document.querySelectorAll('.feature-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          alert('This would link to the ATO Careers portal – demo version.');
+        });
+      });
     })();
   </script>
-
 </body>
 </html>

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATO Community | Australian Taxation Office</title>
+  <!-- Google Fonts: Inter (clean, modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Abril Fatface (for header) -->
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ----- DESIGN SYSTEM ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #3844CA;
+      --navy-light: #1e3f62;
+      --gold: #d4a373;
+      --gold-light: #e9d5b5;
+      --red: #c93c20;
+      --red-light: #f8d7d0;
+      --cream: #f8f4ed;
+      --white: #ffffff;
+      --gray-50: #f9fafc;
+      --gray-100: #f2f4f8;
+      --gray-200: #e9ecf0;
+      --gray-600: #4a5568;
+      --gray-800: #1e293b;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 12px 28px -8px rgba(0, 40, 80, 0.15);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 40, 80, 0.3);
+      --shadow-xl: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--navy); /* whole page blue, but content area will override */
+      color: var(--gray-800);
+      line-height: 1.5;
+    }
+
+    /* ----- HEADER (login button removed) ----- */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 0.7rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .logo-img {
+      height: 80px;
+      filter: brightness(1.05);
+    }
+
+    .header-text h4 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.9;
+      font-family: 'Abril Fatface', cursive;
+      justify-items: left;
+    }
+
+    .header-text hr {
+      width: 130px;
+      border: none;
+      height: 1px;
+      background: var(--white);
+      margin: 4px 5;
+    }
+
+    /* ----- NAV BAR (icons white) ----- */
+    .nav-bar {
+      background: var(--navy);
+      padding: 0.6rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 90;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: white; /* icons white */
+      font-weight: 950;
+      padding: 0.6rem 1rem;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .nav-btn i {
+      font-size: 1.2rem;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--gold);
+    }
+
+    .nav-center {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.4rem 2rem;
+      border-radius: 40px;
+    }
+
+    /* ----- SIDEBAR (unchanged) ----- */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 300;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 95px;
+      left: -500px;
+      width: 400px;
+      max-width: 75vw;
+      height: 70%;
+      background: white;
+      transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 400;
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+      border-right: 4px solid var(--navy);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar-header {
+      padding: 2rem 2rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-header h2 {
+      color: var(--navy);
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--red);
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+
+    .sidebar-close:hover {
+      background: var(--red-light);
+    }
+
+    .sidebar-nav {
+      padding: 1rem 2rem 2rem;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      color: #334155;
+      text-decoration: none;
+      border-bottom: 1px solid #edf2f7;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .sidebar-nav a i {
+      color: var(--navy);
+      width: 28px;
+      font-size: 1.2rem;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--navy);
+      transform: translateX(8px);
+    }
+
+    .sidebar-footer {
+      padding: 1rem 2rem 2rem;
+      text-align: center;
+    }
+
+    /* ----- SEARCH BAR ----- */
+    .search-section {
+      background: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .search-section.active {
+      max-height: 120px;
+    }
+
+    .search-container {
+      padding: 1.2rem 5%;
+    }
+
+    .search-box {
+      background: var(--gray-100);
+      border-radius: 60px;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid #dce3ec;
+    }
+
+    .search-box i {
+      color: var(--navy);
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    /* ===== COMMUNITY MAIN CONTENT ===== */
+    .community-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* Hero section (blue background) – search removed */
+    .community-hero {
+      text-align: left;
+      padding: 3rem 5% 4rem;
+      background: var(--navy);
+      color: white;
+    }
+    .community-hero h2 {
+      font-size: 2.5rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+    }
+    .community-hero p{
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    
+    .community-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0; /* no search, so no bottom margin */
+      font-size: 1.1rem;
+      color: white;
+    }
+    .community-stats span {
+      font-weight: 600;
+    }
+
+    /* Content section (light background) */
+    .content-section {
+      background: var(--gray-50);
+      padding: 3rem 5%;
+    }
+
+    /* Three cards – slim, hero‑style with colored bottom borders */
+    .community-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .community-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.2rem 1rem; /* slimmer height */
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+      border-bottom: 5px solid transparent;
+    }
+    .community-card:nth-child(1) { border-bottom-color: #560E98; }
+    .community-card:nth-child(2) { border-bottom-color: #87211B; }
+    .community-card:nth-child(3) { border-bottom-color: #1B8781; }
+    .community-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .community-card i {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .community-card h3 {
+      color: var(--navy);
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+    .community-card p {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+
+    /* Hot topics */
+    .hot-topics {
+      margin-bottom: 3rem;
+    }
+    .hot-topics h2 {
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      border-left: 6px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .hot-topics ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .hot-topics li {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--gold);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+    .hot-topics li a {
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    /* Questions and side layout */
+    .community-questions-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .questions-list h2 {
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      border-left: 6px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .question-item {
+      background: white;
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+    .question-item .meta {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      margin-bottom: 0.3rem;
+    }
+    .question-item .meta i {
+      color: var(--gold);
+      margin-right: 0.3rem;
+    }
+    .question-item p {
+      margin: 0.5rem 0;
+    }
+    .question-item .stats {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+    .view-all {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .sidebar-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .browse-topics h2, .latest-news h2, .top-contributors h2 {
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+      border-left: 6px solid var(--gold);
+      padding-left: 1rem;
+    }
+    .topic-icons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .topic-icons .icon-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+    .topic-icons .icon-item i {
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .topic-icons .icon-item span {
+      font-size: 0.9rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+.cancel-btn {
+      background: none;
+      border: 1px solid #d0d9e2;
+      color: var(--navy);
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s;
+    }
+
+    .cancel-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+    .news-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+
+    .contributor-list {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+    .contributor {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .contributor:last-child {
+      border-bottom: none;
+    }
+    .contributor .name {
+      font-weight: 600;
+    }
+
+    .ask-question-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .ask-question-box h3 {
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .ask-question-box button {
+      background: var(--navy);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--red);
+      cursor: pointer;
+    }
+    .modal-content h2 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    /* ----- HOMEPAGE FOOTER (dark purple) ----- */
+    .footer {
+      background: #160925;
+      color: white;
+      padding: 3rem 5% 2rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-column h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .footer-column h4 i {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-column h4 i.rotate {
+      transform: rotate(180deg);
+    }
+
+    .footer-column ul {
+      list-style: none;
+      max-height: 300px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .footer-column ul.collapsed {
+      max-height: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-column a {
+      color: #b7c9dd;
+      text-decoration: none;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .footer-column a:hover {
+      color: var(--gold);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      transition: 0.2s;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+    }
+
+     .footer-acknowledgement {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #b7c9dd;
+      font-size: 0.9rem;
+    }
+
+    .footer-acknowledgement i {
+      font-size: 2.5rem;
+      color: var(--gold);
+    }
+    .ato-logo {
+  height: 80px;
+  filter: brightness(1.05);
+}
+    .footer-copyright {
+      text-align: center;
+      border-top: 1px solid #3a5a7a;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+      color: #b7c9dd;
+    }
+
+    .footer-copyright a {
+      color: #b7c9dd;
+      text-decoration: none;
+    }
+
+    .footer-copyright a:hover {
+      color: var(--gold);
+    }
+
+    /* fixed chat & report */
+   
+
+.report-bubble {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background: var(--navy);
+  color: white;
+  padding: 0.1rem 0.2rem;
+  border-radius: 1px;
+  border: none;
+  box-shadow: var(--shadow-lg), 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 200;
+  font-weight: 100;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: var(--transition);
+}
+
+.report-bubble:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  background: linear-gradient var(black);
+}
+
+.report-bubble i {
+  font-size: 0.8rem;
+}
+
+    @media (max-width: 1100px) {
+      .community-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .community-questions-section {
+        grid-template-columns: 1fr;
+      }
+      .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .community-cards {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        width: 100%;
+        left: -100%;
+      }
+      .header-text hr {
+        width: 100px;
+      }
+      .footer-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <img src="https://i.ibb.co/jPd83cjL/02052025-Medicare.png" alt="ATO" class="logo-img">
+      <div class="header-text">
+        <h4>Australian Government</h4>
+        <hr>
+        <h4>Australian Taxation Office</h4>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV BAR (icons white) -->
+  <div class="nav-bar">
+    <div class="nav-left">
+      <button class="nav-btn" id="menuButton"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="nav-center">ATO Community</div>
+    <div class="nav-right">
+      <button class="nav-btn" id="searchButton"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="sidebar-close" id="closeSidebar"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-nav">
+      <a href="index.html"><i class="fas fa-home"></i> Home<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="path.html"><i class="fas fa-users"></i> Individuals and families<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="business.html"><i class="fas fa-building"></i> Businesses and organisations<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="tax-professionals.html"><i class="fas fa-user-tie"></i> Tax and super professionals<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="#"><i class="fas fa-comments"></i> ATO Community</a>
+      <a href="#"><i class="fas fa-gavel"></i> Legal database<i class="fas fa-circle-chevron-right"></i></a>
+      <a href="newsarticle.html"><i class="fas fa-newspaper"></i> What's New<i class="fas fa-circle-chevron-right"></i></a>
+    </div>
+    <div class="sidebar-footer">
+      <button class="cancel-btn" id="sidebarCloseBtn"><i class="fas fa-times"></i> Close menu</button>
+    </div>
+  </div>
+
+  <!-- SEARCH BAR (hidden by default) -->
+  <div class="search-section" id="searchSection">
+    <div class="search-container">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search ato.gov.au — tax return, myGov, super...">
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMUNITY MAIN CONTENT -->
+  <main class="community-container">
+    <!-- Hero section (blue background) – no search input -->
+    <div class="community-hero">
+      <h2>Welcome to the ATO's online Community</h2> <p>— join the conversation and find answers to your tax and super questions.</p><br><br>
+      <div class="community-stats">
+        <span><i class="fas fa-users"></i> 210161 members</span>
+        <span><i class="fas fa-circle"></i> 24 online</span>
+        <span><i class="fas fa-comments"></i> 263499 posts</span>
+      </div>
+    </div>
+
+    <!-- Content section (light background) -->
+    <div class="content-section">
+      <!-- Three slim cards (hero style) -->
+      <div class="community-cards">
+        <div class="community-card" data-modal="tour">
+          <i class="fas fa-play-circle"></i>
+          <h3>Get started</h3>
+          <p>Take the ATO Community tour</p>
+        </div>
+        <div class="community-card" data-modal="ask">
+          <i class="fas fa-question-circle"></i>
+          <h3>Ask the community</h3>
+          <p>Search content or ask a question</p>
+        </div>
+        <div class="community-card" data-modal="news">
+          <i class="fas fa-newspaper"></i>
+          <h3>Read news & articles</h3>
+          <p>Helpful articles and latest news</p>
+        </div>
+      </div>
+
+      <!-- Hot topics -->
+      <div class="hot-topics">
+        <h2>Hot topics</h2>
+        <ul>
+          <li data-modal="topic1"><a href="#">Finding your TFN</a></li>
+          <li data-modal="topic2"><a href="#">Setting up an ATO payment plan</a></li>
+          <li data-modal="topic3"><a href="#">Working out your concessional and non concessional super contributions</a></li>
+        </ul>
+      </div>
+
+      <!-- Questions and sidebar -->
+      <div class="community-questions-section">
+        <div class="questions-list">
+          <h2>Questions</h2>
+          <div class="question-item" data-modal="q1">
+            <div class="meta"><i class="fas fa-user"></i> kaz2004 in Lodging & reporting for your clients</div>
+            <p>Is a TFN or ABN required for a zero income & expense private company who owns shares ...</p>
+            <div class="stats">17 minutes ago · 3 views · 0 responses</div>
+          </div>
+          <div class="question-item" data-modal="q2">
+            <div class="meta"><i class="fas fa-user"></i> lucytartan in Lodging & reporting</div>
+            <p>Why am I required to complete a MOD C form? ...</p>
+            <div class="stats">1 hour ago · 6 views · 0 responses</div>
+          </div>
+          <div class="question-item" data-modal="q3">
+            <div class="meta"><i class="fas fa-user"></i> metk34 in Property</div>
+            <p>cost base of land for duplex ...</p>
+            <div class="stats">1 hour ago · 5 views · 0 responses</div>
+          </div>
+          <div class="question-item" data-modal="q4">
+            <div class="meta"><i class="fas fa-user"></i> foxb in Your super</div>
+            <p>Australian now resident overseas access to super ...</p>
+            <div class="stats">3 hours ago · 5 views · 0 responses</div>
+          </div>
+          <div class="question-item" data-modal="q5">
+            <div class="meta"><i class="fas fa-user"></i> Izita in Lodging & reporting</div>
+            <p>Certificate of Residency Overdue ...</p>
+            <div class="stats">3 hours ago · 10 views · 0 responses</div>
+          </div>
+          <a href="#" class="view-all">View all questions <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="sidebar-right">
+          <div class="browse-topics">
+            <h2>Browse content by topic</h2>
+            <div class="topic-icons">
+              <div class="icon-item" data-modal="topic_yourtax"><i class="fas fa-file-invoice"></i><span>Your tax & super</span></div>
+              <div class="icon-item" data-modal="topic_investments"><i class="fas fa-chart-line"></i><span>Your investments</span></div>
+              <div class="icon-item" data-modal="topic_business"><i class="fas fa-briefcase"></i><span>Tax & super for business</span></div>
+              <div class="icon-item" data-modal="topic_online"><i class="fas fa-laptop"></i><span>Online services</span></div>
+              <div class="icon-item" data-modal="topic_professionals"><i class="fas fa-user-tie"></i><span>Tax professionals</span></div>
+            </div>
+          </div>
+
+          <div class="latest-news">
+            <h2>Latest news and articles</h2>
+            <div class="news-card" data-modal="news1">ATO updates for end of financial year</div>
+            <div class="news-card" data-modal="news2">Changes to super contribution rules</div>
+            <div class="news-card" data-modal="news3">How to lodge your tax return online</div>
+            <a href="#" class="view-all">View all news and articles <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <div class="top-contributors">
+            <h2>Top liked users</h2>
+            <div class="contributor-list">
+              <div class="contributor" data-modal="user1"><span class="name">Contributor1</span> <span>★ 1250</span></div>
+              <div class="contributor" data-modal="user2"><span class="name">Contributor2</span> <span>★ 980</span></div>
+              <div class="contributor" data-modal="user3"><span class="name">Contributor3</span> <span>★ 760</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ask a question -->
+      <div class="ask-question-box">
+        <h3>Ask us your tax and super questions</h3>
+        <button>Ask a question</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- HOMEPAGE FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>Tools <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+          
+            <li><a href="#">Forms and instructions</a></li>
+            <li><a href="#">Tax rates and codes</a></li>
+            <li><a href="#">Calculators and tools</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Tax information for <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">People with disability</a></li>
+            <li><a href="#">Aboriginal and Torres Strait Islander peoples</a></li>
+            <li><a href="#">Norfolk Island</a></li>
+            <li><a href="#">Other languages</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Help and support <i class="fas fa-circle-chevron-down"></i></h4>
+          <ul>
+            <li><a href="#">Top call centre questions</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Identity security and scams</a></li>
+            <li><a href="#">Financial difficulties</a></li>
+          </ul>
+        </div>
+      <div class="footer-column">
+  
+  <ul>
+    <li><a href="about.html">About ATO</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="privacypolicy.html">Privacy policy</a></li>
+    
+    
+  </ul>
+</div>
+      </div>
+
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+
+     <div class="footer-acknowledgement">
+      <img src="https://i.ibb.co/Tqr4RB6F/In-Shot-20260302-222639957.png" alt="ATO Indigenous Badge" class="ato-logo"/>
+        <span>We acknowledge the Traditional Owners and Custodians of Country throughout Australia and their continuing connection to land, waters and community. We pay our respects to them, their cultures, and Elders past and present.</span>
+      </div>
+
+      <div class="footer-copyright">
+        <a href="#">© Commonwealth of Australia</a> | <a href="#">View related websites</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FIXED CHAT & REPORT -->
+  <div class="report-bubble"><i class="fas fa-exclamation-triangle"></i> Report issue</div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <span class="modal-close" id="modalClose">&times;</span>
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalBody">Content goes here.</p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ----- EXISTING FUNCTIONALITY (sidebar, search, footer) -----
+      const menuBtn = document.getElementById('menuButton');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const closeSidebar = document.getElementById('closeSidebar');
+      const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+      function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeSidebarFunc() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      menuBtn.addEventListener('click', openSidebar);
+      closeSidebar.addEventListener('click', closeSidebarFunc);
+      sidebarCloseBtn.addEventListener('click', closeSidebarFunc);
+      overlay.addEventListener('click', closeSidebarFunc);
+
+      const searchBtn = document.getElementById('searchButton');
+      const searchSection = document.getElementById('searchSection');
+      searchBtn.addEventListener('click', () => {
+        searchSection.classList.toggle('active');
+      });
+
+      // Footer dropdowns
+      const footerHeaders = document.querySelectorAll('.footer-column h4');
+      footerHeaders.forEach(header => {
+        const icon = header.querySelector('i');
+        const ul = header.nextElementSibling;
+        ul.classList.remove('collapsed');
+        icon.classList.remove('rotate');
+        header.addEventListener('click', () => {
+          ul.classList.toggle('collapsed');
+          icon.classList.toggle('rotate');
+        });
+      });
+
+      // ----- MODAL INTERACTIVITY -----
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalClose = document.getElementById('modalClose');
+
+      function showModal(title, content) {
+        modalTitle.textContent = title;
+        modalBody.textContent = content;
+        modalOverlay.style.display = 'flex';
+      }
+
+      // Close modal
+      modalClose.addEventListener('click', () => {
+        modalOverlay.style.display = 'none';
+      });
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) modalOverlay.style.display = 'none';
+      });
+
+      // Attach click handlers to all interactive cards
+      const cardData = {
+        'tour': { title: 'Get started', body: 'Take the ATO Community tour – a quick introduction to asking questions, finding answers, and connecting with others.' },
+        'ask': { title: 'Ask the community', body: 'Search existing content or post a new question. Our community members and ATO representatives are here to help.' },
+        'news': { title: 'Read news & articles', body: 'Browse helpful articles, announcements, and the latest news from the ATO.' },
+        'topic1': { title: 'Finding your TFN', body: 'Your Tax File Number (TFN) is a unique identifier. If you’ve lost it, you can find it online via myGov, on your notice of assessment, or by calling the ATO.' },
+        'topic2': { title: 'Setting up an ATO payment plan', body: 'If you can’t pay your tax debt in full, you can set up a payment plan online or by phone. Interest and penalties may apply.' },
+        'topic3': { title: 'Concessional and non‑concessional super contributions', body: 'Concessional contributions are before‑tax (including employer super). Non‑concessional are after‑tax contributions. There are annual caps and rules.' },
+        'q1': { title: 'TFN for private company', body: 'A private company with zero income and expenses may still need a TFN for reporting. An ABN might be sufficient. Check with the ATO.' },
+        'q2': { title: 'MOD C form requirement', body: 'MOD C is used to update your personal details with the ATO. You may need it after certain life events.' },
+        'q3': { title: 'Cost base for duplex', body: 'The cost base for land used to build a duplex is apportioned based on the value of each property. Seek professional advice.' },
+        'q4': { title: 'Overseas access to super', body: 'If you are an Australian citizen living overseas, you may be able to access your super under certain conditions (e.g., retirement after age 60).' },
+        'q5': { title: 'Certificate of Residency overdue', body: 'Processing times can vary. If it’s been longer than the standard time, contact the ATO for an update.' },
+        'topic_yourtax': { title: 'Your tax & super', body: 'Find information about income tax, superannuation, lodgments, and managing your account.' },
+        'topic_investments': { title: 'Your investments', body: 'Tax implications for shares, property, crypto, and other investments. Includes capital gains tax.' },
+        'topic_business': { title: 'Tax & super for business', body: 'Information for businesses, including GST, BAS, employer obligations, and concessions.' },
+        'topic_online': { title: 'Online services', body: 'Access ATO online services via myGov, the Business Portal, or Agent Portal. Get help with technical issues.' },
+        'topic_professionals': { title: 'Tax professionals', body: 'Resources for registered tax agents, BAS agents, and super professionals. Includes practice support and updates.' },
+        'news1': { title: 'ATO updates for end of financial year', body: 'Key dates and changes for EOFY: super guarantee rate increase, tax offsets, and lodgment deadlines.' },
+        'news2': { title: 'Changes to super contribution rules', body: 'Super contribution caps have increased. Learn about catch-up contributions and work test exemptions.' },
+        'news3': { title: 'How to lodge your tax return online', body: 'Step‑by‑step guide to lodging through myTax in myGov. Includes what documents you need.' },
+        'user1': { title: 'Contributor1', body: 'Top liked user with 1250 likes. Active in property and investments topics.' },
+        'user2': { title: 'Contributor2', body: 'Top liked user with 980 likes. Specialises in superannuation and retirement.' },
+        'user3': { title: 'Contributor3', body: 'Top liked user with 760 likes. Expert in small business and GST.' }
+      };
+
+      document.querySelectorAll('[data-modal]').forEach(el => {
+        el.addEventListener('click', () => {
+          const key = el.getAttribute('data-modal');
+          const data = cardData[key];
+          if (data) showModal(data.title, data.body);
+        });
+      });
+
+      // Also make the hot topics list items clickable via the <li> itself
+      document.querySelectorAll('.hot-topics li').forEach(li => {
+        li.addEventListener('click', (e) => {
+          // prevent if the click came from the link
+          if (e.target.tagName === 'A') return;
+          const modalKey = li.getAttribute('data-modal');
+          if (modalKey) {
+            const data = cardData[modalKey];
+            if (data) showModal(data.title, data.body);
+          }
+        });
+      });
+
+      // Similarly for contributor list items
+      document.querySelectorAll('.contributor').forEach(contributor => {
+        contributor.addEventListener('click', (e) => {
+          const modalKey = contributor.getAttribute('data-modal');
+          if (modalKey) {
+            const data = cardData[modalKey];
+            if (data) showModal(data.title, data.body);
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
